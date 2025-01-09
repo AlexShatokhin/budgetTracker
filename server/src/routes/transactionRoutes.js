@@ -1,9 +1,10 @@
 const routes = require("express").Router();
+const authMiddleware = require("../middleware/authMiddleware");
 const transactionService = require("../services/transactionService");
 
-routes.post("/transactions", (req, res) => {});
-routes.get("/transactions", (req, res) => {})
-routes.put("/transactions/:id", (req, res) => {});
-routes.delete("/transactions/:id", (req, res) => {});
+routes.post("/transactions", authMiddleware, transactionService.postTransaction);
+routes.get("/transactions", authMiddleware, transactionService.getTransactions)
+routes.put("/transactions/:transactionID", authMiddleware, (req, res) => {res.status(200).json({message: "successfull"})});
+routes.delete("/transactions/:transactionID", authMiddleware, transactionService.deleteTransaction);
 
 module.exports = routes;
