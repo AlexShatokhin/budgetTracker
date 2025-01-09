@@ -1,13 +1,13 @@
-
+import NotFoundPage from "../../NotFoundPage/NotFoundPage"
 
 export const routes = [
-    {path: "/", component: null, isPrivate: false},
-    {path: "/register", component: null, isPrivate: false},
+    {path: "/", component: NotFoundPage, isPrivate: false},
+    {path: "/register", component: NotFoundPage, isPrivate: false},
 
-    {path: "/home", component: null, isPrivate: true},
-    {path: "/transactions", component: null, isPrivate: true},
-    {path: "/reports", component: null, isPrivate: true},
+    {path: "/home", component: NotFoundPage, isPrivate: true},
+    {path: "/transactions", component: NotFoundPage, isPrivate: true},
+    {path: "/reports", component: NotFoundPage, isPrivate: true},
 
-    {path: "*", component: null, isPrivate: false},
+    {path: "*", component: NotFoundPage, isPrivate: false},
 
 ]
