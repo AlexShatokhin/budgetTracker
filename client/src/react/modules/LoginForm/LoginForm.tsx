@@ -47,19 +47,6 @@ const Login = () => {
                 <div className="login-form__registration">
                     <p>Don't have an account? <Link to = "/register">Sign up</Link></p>
                 </div>
-
-                {/* <input
-                    value={email} 
-                    onChange={(e) => setEmail(e.target.value)}
-                    type="text" 
-                    placeholder="email" />
-
-                <input
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)} 
-                    type="password" 
-                    placeholder="password" /> */}
-
         </form>
     )
 }
