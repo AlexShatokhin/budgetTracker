@@ -1,0 +1,11 @@
+.login{
+    display: flex;
+    height: calc(100vh - 10px);
+    padding: 5px;
+    &__image{
+        width: 50%;
+        height: calc(100vh - 10px);
+        object-fit: cover;
+        border-radius: 30px;
+    }
+}
