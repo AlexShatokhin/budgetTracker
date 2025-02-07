@@ -12,13 +12,20 @@ export const authorizationApi = createApi({
         userRegistration: build.mutation<AuthenticationResponseType, AuthenticationRequestType>({
             query: (body) => ({
                 method: "POST",
-                url: "auth/register",
+                url: "/register",
                 body
             })
         }),
+        userAuthorization: build.query<AuthenticationResponseType, AuthenticationRequestType>({
+            query: (body) => ({
+                url: `/login?email=${body.email}&password=${body.password}`,
+                method: "GET",
+            })
+        })
     }),
 })
 
 export const {
-    useUserRegistrationMutation
+    useUserRegistrationMutation,
+    useLazyUserAuthorizationQuery
 } = authorizationApi

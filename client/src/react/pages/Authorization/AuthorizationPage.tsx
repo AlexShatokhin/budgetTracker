@@ -9,7 +9,9 @@ const LoginPage = () => {
 
     return (
         <section className="login">
-            <img src={require("../../../assets/example.png")} alt="login" className="login__image" />
+            <video className="login__image" autoPlay loop playsInline>
+                <source src={require("../../../assets/auth.mp4")} type="video/mp4" />
+            </video>
             <div className={`login-wrapper`}>
                 <div className={`login__content ${location.pathname.includes("register") ? "login-wrapper_register" : ""}`}>
                     <LoginForm />

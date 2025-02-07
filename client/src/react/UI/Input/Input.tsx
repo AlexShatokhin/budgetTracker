@@ -1,5 +1,5 @@
 import { FC } from "react";
-// import {BiShow, BiHide} from "react-icons/bi";
+import {BiShow, BiHide} from "react-icons/bi";
 import "./input.scss"
 import { colors } from "../../../constants/colors";
 import useToggle from "../../hooks/useToggle";
@@ -30,8 +30,7 @@ const Input : FC<InputPropsType> = ({className, value, placeholder, type, onChan
             />
             {type === "password" && (
                 <button type="button" className="toggle-password" onClick={toggleShowPassword}>
-                    {showPassword ? <span>Hide</span> : <span>Show</span>}
-                    {/* {showPassword ? <BiHide size={25} color={colors.grey}/> : <BiShow size={25} color={colors.grey}/>} */}
+                    {showPassword ? <BiHide size={25} color={colors.grey}/> : <BiShow size={25} color={colors.grey}/>}
                 </button>
             )}
         </div>

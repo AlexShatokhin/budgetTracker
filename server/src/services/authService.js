@@ -7,6 +7,12 @@ class authService {
             const { email, password } = req.body;
             const hashPassword = await bcrypt.hash(password, 10);
             const prisma = new PrismaClient();
+            const user = await prisma.users.findUnique({
+                where: {email}
+            });
+            if(user){
+                return res.status(400).json({message: 'User already exists'});
+            }
             await prisma.users.create({
                 data: {
                     email,
