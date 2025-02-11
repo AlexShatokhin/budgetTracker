@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import Input from "../../UI/Input/Input";
 import Button from "../../UI/Button/Button";
 import Checkbox from "../../UI/Checkbox/Checkbox";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useTypedDispatch } from "../../hooks/useRedux";
 import { setToken } from "../../pages/Authorization/authorizationSlice";
 import { useLazyUserAuthorizationQuery } from "../../api/modules/authorizationApi";
 
 import "./login_form.scss"
 import useToggle from "../../hooks/useToggle";
+import { AuthenticationResponseType } from "../../types/AuthenticationResponseType";
 const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -18,12 +19,19 @@ const Login = () => {
         isError
     }] = useLazyUserAuthorizationQuery();
     const dispatch = useTypedDispatch();
+    const navigate = useNavigate();
     
     const handleLogin = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         request({email, password}).unwrap()
-        .then(e => {dispatch(setToken(e.token)); setServerMessage("Success")})
+        .then(loginSuccess)
         .catch(e => setServerMessage(e.data.message));
+    }
+
+    const loginSuccess = (e : AuthenticationResponseType) => {
+        dispatch(setToken(e.token)); 
+        setServerMessage(e.message);    
+        navigate("/home")
     }
 
     return (

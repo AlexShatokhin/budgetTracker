@@ -11,10 +11,12 @@ const authorizationSlice = createSlice({
         setToken(state, action) {
             state.token = action.payload;
             state.isAuth = true;
+            sessionStorage.setItem("user", action.payload);
         },
         removeToken(state) {
             state.token = "";
             state.isAuth = false;
+            sessionStorage.removeItem("user");
         }
     }   
 })
