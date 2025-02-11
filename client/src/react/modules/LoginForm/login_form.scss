@@ -64,11 +64,21 @@
 }
 
 .message{
+    width: 100%;
+    height: 30px;
+    text-align: center;
     margin-top: 20px;
+    opacity: 1;
+    transition: .2s all;
+
     &-error{
         color: $red;
     }
     &-success{
         color: $green;
     }
+}
+
+.hidden{
+    opacity: 0;
 }

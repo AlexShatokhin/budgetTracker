@@ -22,7 +22,7 @@ const Login = () => {
     const handleLogin = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
         request({email, password}).unwrap()
-        .then(e => dispatch(setToken(e.token)))
+        .then(e => {dispatch(setToken(e.token)); setServerMessage("Success")})
         .catch(e => setServerMessage(e.data.message));
     }
 
