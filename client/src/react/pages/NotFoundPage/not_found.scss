@@ -1,0 +1,35 @@
+@import "../../../constants/_colors";
+
+.error{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    &__image{
+        width: 400px;
+        margin-right: 50px;
+    }
+    &__text{
+        h1{
+            font-size: 50px;
+            line-height: 20px;
+        }
+        h2{
+            color: $grey;
+            font-weight: 300;
+            font-size: 25px;
+            margin-bottom: 40px;
+        } 
+        a{
+            color: $white;
+            background-color: $black;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            width: 90px;
+            justify-content: space-between;
+        }
+    }
+}
