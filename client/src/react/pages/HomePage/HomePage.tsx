@@ -5,7 +5,8 @@ const HomePage = () => {
     return (
         <section className="home">
             <Layout>
-                <h1>Home Page</h1>
+                <h1>Hello, ...</h1>
+                <p>Welcome to your financial insights.</p>
             </Layout>
         </section>
     )
