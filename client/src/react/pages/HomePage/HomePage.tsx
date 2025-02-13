@@ -1,5 +1,6 @@
 import FinanceChart from "../../components/FinanceChart/FinanceChat";
 import Layout from "../../components/Layout/Layout"
+import MonthlyChart from "../../components/MonthlyChart/MonthlyChart";
 
 
 const HomePage = () => {
@@ -10,6 +11,7 @@ const HomePage = () => {
                 <p>Welcome to your financial insights.</p>
 
                 <FinanceChart />
+                <MonthlyChart />
             </Layout>
         </section>
     )

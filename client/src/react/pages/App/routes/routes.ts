@@ -6,7 +6,7 @@ export const routes = [
     {path: "/", component: AutorizationPage, isPrivate: false},
     {path: "/register", component: AutorizationPage, isPrivate: false},
 
-    {path: "/home", component: HomePage, isPrivate: true},
+    {path: "/home", component: HomePage, isPrivate: false},
     {path: "/transactions", component: NotFoundPage, isPrivate: true},
     {path: "/reports", component: NotFoundPage, isPrivate: true},
 
