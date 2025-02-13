@@ -5,7 +5,6 @@ import RegisterForm from "../../modules/RegisterForm/RegisterForm";
 
 const LoginPage = () => {
     const location = useLocation();
-    console.log(location)
 
     return (
         <section className="login">

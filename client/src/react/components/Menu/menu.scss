@@ -1,0 +1,53 @@
+@import "../../../constants/__colors.scss";
+
+.menu{
+    width: 250px;
+    height: calc(100vh - 40px);
+    border: none;
+    border-right: 1px solid #e0e0e0;
+    padding: 20px 30px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    &__list{
+        margin: 0;
+        padding: 0;
+        &-item{
+            list-style-type: none;
+            margin-bottom: 10px;
+            a {
+                width: calc(100% - 30px);
+                display: block;
+                color: $black;
+                text-decoration: none;
+                padding: 15px 20px;
+                border-radius: 10px;
+                font-size: 18px;
+                transition: .3s all;
+                display: flex;
+                align-items: center;
+                
+                &:hover{
+                    background-color: rgba($grey, 0.1);
+                }
+                svg{
+                    margin-right: 10px;
+                    font-size: 25px;
+                }
+            }
+            .active{
+                background-color: rgba($grey, 0.2);
+                &:hover{
+                    background-color: rgba($grey, 0.4);
+                }
+            }
+
+        }
+    }
+    &__footer{
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+    }
+}

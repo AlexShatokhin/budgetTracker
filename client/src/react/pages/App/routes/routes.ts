@@ -1,11 +1,12 @@
 import AutorizationPage from "../../Authorization/AuthorizationPage"
+import HomePage from "../../HomePage/HomePage"
 import NotFoundPage from "../../NotFoundPage/NotFoundPage"
 
 export const routes = [
     {path: "/", component: AutorizationPage, isPrivate: false},
     {path: "/register", component: AutorizationPage, isPrivate: false},
 
-    {path: "/home", component: NotFoundPage, isPrivate: true},
+    {path: "/home", component: HomePage, isPrivate: true},
     {path: "/transactions", component: NotFoundPage, isPrivate: true},
     {path: "/reports", component: NotFoundPage, isPrivate: true},
 
