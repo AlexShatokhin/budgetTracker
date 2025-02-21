@@ -29,7 +29,7 @@ const Login = () => {
     }
 
     const loginSuccess = (e : AuthenticationResponseType) => {
-        dispatch(setToken(e.token)); 
+        dispatch(setToken({token: e.token, email})); 
         setServerMessage(e.message);    
         navigate("/home")
     }

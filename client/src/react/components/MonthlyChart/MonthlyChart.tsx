@@ -3,7 +3,7 @@ import { Chart as ChartJS, BarElement, Tooltip, Legend, CategoryScale, LinearSca
 
 ChartJS.register(BarElement, Tooltip, Legend, CategoryScale, LinearScale);
 
-const FinanceChart = () => {
+const MonthlyChart = () => {
     const chartData = {
         labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
         datasets: [
@@ -67,4 +67,4 @@ const FinanceChart = () => {
     );
 }
 
-export default FinanceChart;
+export default MonthlyChart;
