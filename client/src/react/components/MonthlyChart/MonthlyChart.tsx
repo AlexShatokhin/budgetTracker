@@ -1,6 +1,7 @@
 import {FC} from "react";
 import { Bar } from "react-chartjs-2";
 import { Chart as ChartJS, BarElement, Tooltip, Legend, CategoryScale, LinearScale } from 'chart.js';
+import { colors } from "../../../constants/colors";
 
 ChartJS.register(BarElement, Tooltip, Legend, CategoryScale, LinearScale);
 
@@ -16,12 +17,12 @@ const MonthlyChart : FC<MonthlyChartProps> = ({width, height}) => {
             {
                 label: 'Income',
                 data: [5000, 6000, 5500, 7000, 8000, 7500, 9000, 8500, 9500, 10000, 10500, 11000],
-                backgroundColor: '#36A2EB',
+                backgroundColor: colors.blue,
             },
             {
                 label: 'Expenses',
                 data: [3000, 4000, 3500, 5000, 6000, 5500, 7000, 6500, 7500, 8000, 8500, 9000],
-                backgroundColor: '#FF6384',
+                backgroundColor: colors.mediumgrey,
             },
         ],
     };
