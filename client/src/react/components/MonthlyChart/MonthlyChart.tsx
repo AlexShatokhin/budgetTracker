@@ -1,9 +1,15 @@
+import {FC} from "react";
 import { Bar } from "react-chartjs-2";
 import { Chart as ChartJS, BarElement, Tooltip, Legend, CategoryScale, LinearScale } from 'chart.js';
 
 ChartJS.register(BarElement, Tooltip, Legend, CategoryScale, LinearScale);
 
-const MonthlyChart = () => {
+type MonthlyChartProps = {
+    width: string;
+    height: string; 
+}
+
+const MonthlyChart : FC<MonthlyChartProps> = ({width, height}) => {
     const chartData = {
         labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
         datasets: [
@@ -60,9 +66,8 @@ const MonthlyChart = () => {
     };
 
     return (
-        <div className="finance-chart">
-            <h2>Monthly Income and Expenses</h2>
-            <Bar width={900} height={400} data={chartData} options={chartOptions} />
+        <div style={{width, height}} className="finance-chart">
+            <Bar width={width} height={height} data={chartData} options={chartOptions} />
         </div>
     );
 }

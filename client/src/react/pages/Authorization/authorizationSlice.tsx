@@ -14,7 +14,7 @@ const authorizationSlice = createSlice({
             state.email = action.payload.email;
 
             state.isAuth = true;
-            sessionStorage.setItem("user", action.payload);
+            sessionStorage.setItem("user", JSON.stringify(action.payload));
         },
         removeToken(state) {
             state.token = "";

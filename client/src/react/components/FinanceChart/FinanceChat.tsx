@@ -1,3 +1,4 @@
+import {FC} from "react";
 import { Pie } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
@@ -5,7 +6,12 @@ import ChartDataLabels from 'chartjs-plugin-datalabels';
 // Регистрация компонентов
 ChartJS.register(ArcElement, Tooltip, Legend, ChartDataLabels);
 
-const FinanceChart = () => {
+type FinanceChartProps = {
+    width: string;
+    height: string;
+}
+
+const FinanceChart : FC<FinanceChartProps> = ({width, height}) => {
     const chartData = {
         labels: ["Food", "Transport", "Shopping", "Bills", "Others", "Entertainment"],
         datasets: [
@@ -68,9 +74,8 @@ const FinanceChart = () => {
     };
 
     return (
-        <div className="expense-chart">
-            <h2>Expense Chart</h2>
-            <Pie width={500} data={chartData} options={chartOptions} />
+        <div style={{width, height}} className="expense-chart">
+            <Pie data={chartData} options={chartOptions} />
         </div>
     );
 }
