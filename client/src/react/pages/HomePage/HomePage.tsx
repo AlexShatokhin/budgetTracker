@@ -3,8 +3,10 @@ import Layout from "../../components/Layout/Layout"
 import MonthlyChart from "../../components/MonthlyChart/MonthlyChart";
 import Table from "../../components/Table/Table";
 import { useTypedSelector } from "../../hooks/useRedux";
+import { Link } from "react-router-dom";
+import { IoChevronForwardSharp } from "react-icons/io5";
 import Wrapper from "../../UI/Wrapper/Wrapper";
-
+import "./homepage.scss"
 
 const HomePage = () => {
     const {email} = useTypedSelector(state => state.authorization);
@@ -18,8 +20,9 @@ const HomePage = () => {
                     <Wrapper titleInfo="Expense Chart" title="Expense Chart" width="300px" height="330px">
                         <FinanceChart width="300px" height="330px"/>
                     </Wrapper>
-                    <Wrapper title="Recent Transactions" width="calc(100% - 450px)" height="330px">
+                    <Wrapper className="transactions-compact" title="Recent Transactions" width="calc(100% - 450px)" height="330px">
                         <Table />
+                        <Link to="/transactions"> <span>View all</span> <IoChevronForwardSharp /></Link>
                     </Wrapper>
                 </div>
                 <Wrapper titleInfo="Monthly Income and Expenses" title="Monthly Income and Expenses" width="calc(100% - 90px)" height="330px">

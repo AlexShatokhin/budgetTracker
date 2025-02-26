@@ -1,0 +1,23 @@
+@import "../../../constants/_colors";
+
+thead{
+    td{
+        opacity: 0.5;
+        font-weight: 600;
+        div{
+            padding-bottom: 10px;
+        }
+    }
+}
+
+tbody{
+    td{
+        border-top: 2px solid rgba($color: $black, $alpha: 0.1);
+        div {
+            padding: 15px 0;
+        }
+    }
+    .income{
+        color: $green;
+    }
+}

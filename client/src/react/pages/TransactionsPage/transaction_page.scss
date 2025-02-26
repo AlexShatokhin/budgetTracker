@@ -1,0 +1,22 @@
+.transactions{
+    position: relative;
+    .add-transaction{
+        position: absolute;
+        right: 60px;
+        top: 20px;
+        display: flex;
+        align-items: center;
+        font-weight: 600;
+        svg {
+            margin-right: 7px;
+        }
+    }
+    &-content{
+        margin-top: 40px;
+    }
+    &-stats{
+        display: flex;
+        width: 350px;
+        justify-content: space-between;
+    }
+}

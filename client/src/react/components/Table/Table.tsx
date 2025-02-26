@@ -2,12 +2,15 @@ import React, { FC } from 'react';
 import { Table, Header, Body, Row, Cell } from '@table-library/react-table-library/table';
 import { useTheme } from '@table-library/react-table-library/theme';
 
+
+import "./table.scss"
 const data = [
   {
     id: 1,
     date: new Date('2025-02-13'),
     description: 'Groceries',
     amount: "- 50",
+    type: "EXPENSE",
     category: 'Food',
   },
   {
@@ -15,13 +18,23 @@ const data = [
     date: new Date('2025-02-12'),
     description: 'Rent',
     amount: "- 1000",
+    type: "EXPENSE",
     category: 'Housing',
+  },
+  {
+    id: 6,
+    date: new Date('2025-02-09'),
+    description: 'Salary',
+    amount: "+ 250",
+    type: "INCOME",
+    category: 'Work',
   },
   {
     id: 3,
     date: new Date('2025-02-11'),
     description: 'Utilities',
     amount: "- 150",
+    type: "EXPENSE",
     category: 'Bills',
   },
   {
@@ -29,26 +42,14 @@ const data = [
     date: new Date('2025-02-10'),
     description: 'Internet',
     amount: "- 60",
+    type: "EXPENSE",
     category: 'Bills',
   },
-  {
-    id: 5,
-    date: new Date('2025-02-09'),
-    description: 'Transport',
-    amount: "- 30",
-    category: 'Transport',
-  },
-  {
-    id: 5,
-    date: new Date('2025-02-09'),
-    description: 'Salary',
-    amount: "+ 250",
-    category: 'Work',
-  },
+
 ];
 
 const COLUMNS = [
-  { label: 'Date', renderCell: (item: any) => item.date.toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' }) },
+  { label: 'Date', renderCell: (item: any) => item.date.toLocaleString('en-GB', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit', hour12: true }).replace(',', '')},
   { label: 'Description', renderCell: (item: any) => item.description },
   { label: 'Amount', renderCell: (item: any) => `${item.amount} $` },
   { label: 'Category', renderCell: (item: any) => item.category },
@@ -76,9 +77,14 @@ const TransactionTable: FC = () => {
           <Body>
             {tableList.map((item: any) => (
               <Row item={item} key={item.id}>
-                {COLUMNS.map((column) => (
+                {COLUMNS.map((column) => {
+                  console.log(item);
+                  return (
+                    item.type === "INCOME" ?
+                  <Cell key={column.label}><span className='income'>{column.renderCell(item)}</span></Cell> :
                   <Cell key={column.label}>{column.renderCell(item)}</Cell>
-                ))}
+                )
+                })}
               </Row>
             ))}
           </Body>

@@ -1,0 +1,26 @@
+.transaction_stat-item{
+    display: flex;
+    align-items: center;
+    &__icon{
+        width: 45px;
+        height: 45px;
+        border-radius: 50px;
+        border: 2px solid #000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 15px;
+    }
+
+    .type{
+        font-size: 14px;
+        opacity: .6;
+        font-weight: 600;
+        margin-bottom: 5px;
+    }
+
+    .value{
+        font-size: 18px;
+        font-weight: 600;
+    }
+}
