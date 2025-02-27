@@ -19,4 +19,17 @@
         width: 350px;
         justify-content: space-between;
     }
+    &-wrapper{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 40px;
+    }
+    &-select{
+        width: 200px;
+        margin-right: 40px;
+    }
+    .select{
+        z-index: 10;
+    }
 }

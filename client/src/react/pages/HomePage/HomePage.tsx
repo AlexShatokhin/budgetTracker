@@ -1,7 +1,7 @@
 import FinanceChart from "../../components/FinanceChart/FinanceChat";
 import Layout from "../../components/Layout/Layout"
 import MonthlyChart from "../../components/MonthlyChart/MonthlyChart";
-import Table from "../../components/Table/Table";
+import TransactionCompactTable from "../../components/Table/CompactTable";
 import { useTypedSelector } from "../../hooks/useRedux";
 import { Link } from "react-router-dom";
 import { IoChevronForwardSharp } from "react-icons/io5";
@@ -17,11 +17,11 @@ const HomePage = () => {
                 <p>Welcome to your financial insights.</p>
 
                 <div style={{display: "flex", width: "100%", justifyContent: "space-between"}}>
-                    <Wrapper titleInfo="Expense Chart" title="Expense Chart" width="300px" height="330px">
-                        <FinanceChart width="300px" height="330px"/>
+                    <Wrapper titleInfo="Expense Chart" title="Expense Chart" width="300px" height="350px">
+                        <FinanceChart width="300px" height="350px"/>
                     </Wrapper>
-                    <Wrapper className="transactions-compact" title="Recent Transactions" width="calc(100% - 450px)" height="330px">
-                        <Table />
+                    <Wrapper className="transactions-compact" title="Recent Transactions" width="calc(100% - 450px)" height="350px">
+                        <TransactionCompactTable />
                         <Link to="/transactions"> <span>View all</span> <IoChevronForwardSharp /></Link>
                     </Wrapper>
                 </div>

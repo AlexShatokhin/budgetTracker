@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { Table, Header, Body, Row, Cell } from '@table-library/react-table-library/table';
 import { useTheme } from '@table-library/react-table-library/theme';
 
@@ -55,7 +55,7 @@ const COLUMNS = [
   { label: 'Category', renderCell: (item: any) => item.category },
 ];
 
-const TransactionTable: FC = () => {
+const TransactionCompactTable: FC = () => {
   const theme = useTheme({
     Table: `
       --data-table-library_grid-template-columns: 1fr 2fr 1fr 1fr;
@@ -94,4 +94,4 @@ const TransactionTable: FC = () => {
   );
 };
 
-export default TransactionTable;
+export default TransactionCompactTable;
