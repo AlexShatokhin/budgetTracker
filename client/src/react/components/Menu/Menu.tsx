@@ -6,6 +6,8 @@ import { MdOutlineLogin } from "react-icons/md";
 import MenuLink from "./UI/MenuLink";
 
 import "./menu.scss"
+import { useTypedDispatch } from "../../hooks/useRedux";
+import { removeToken } from "../../pages/Authorization/authorizationSlice";
 
 
 const routes = [
@@ -14,6 +16,11 @@ const routes = [
     {path: "/reports", name: "Reports", icon: <IoStatsChart />}
 ]
 const Menu = () => {
+    const dispatch = useTypedDispatch();
+    const logout = () => {
+        dispatch(removeToken());
+        localStorage.removeItem("token");
+    }
 
     return (
         <nav className="menu">
@@ -28,7 +35,7 @@ const Menu = () => {
             </ul>
             <ul className="menu__footer">
                 <MenuLink route={"/settings"} name={"Settings"} icon={<IoMdSettings />}/>
-                <MenuLink route={"/"} name={"Log Out"} icon={<MdOutlineLogin />}/>
+                <MenuLink onClick={logout} route={"/"} name={"Log Out"} icon={<MdOutlineLogin />}/>
             </ul>
         </nav>
     )

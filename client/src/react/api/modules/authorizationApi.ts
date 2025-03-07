@@ -21,11 +21,18 @@ export const authorizationApi = createApi({
                 url: `/login?email=${body.email}&password=${body.password}`,
                 method: "GET",
             })
+        }),
+        fetchUserData: build.query<{message: string, email: string}, void>({
+            query: () => ({
+                url: "/me",
+                method: "GET",
+            })
         })
     }),
 })
 
 export const {
     useUserRegistrationMutation,
-    useLazyUserAuthorizationQuery
+    useLazyUserAuthorizationQuery,
+    useFetchUserDataQuery
 } = authorizationApi

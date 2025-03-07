@@ -78,7 +78,6 @@ const TransactionCompactTable: FC = () => {
             {tableList.map((item: any) => (
               <Row item={item} key={item.id}>
                 {COLUMNS.map((column) => {
-                  console.log(item);
                   return (
                     item.type === "INCOME" ?
                   <Cell key={column.label}><span className='income'>{column.renderCell(item)}</span></Cell> :

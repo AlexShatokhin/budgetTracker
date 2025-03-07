@@ -56,7 +56,6 @@ const FinanceChart : FC<FinanceChartProps> = ({width, height}) => {
             },
             datalabels: {
                 formatter: (value: any, context: any) => {
-                    console.log(value, context);
                     const total = context.dataset.data.reduce((acc: number, curr: number) => acc + curr, 0);
                     const percentage = ((value / total) * 100).toFixed(1);
                     const label = chartData.labels[context.dataIndex];

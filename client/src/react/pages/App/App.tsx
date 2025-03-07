@@ -2,8 +2,20 @@ import { Routes, Route } from "react-router-dom";
 import PrivateRoute from "../../components/PrivateRoute/PrivateRoute";
 
 import { routes } from "./routes/routes";
+import { useEffect } from "react";
+import { useFetchUserDataQuery } from "../../api/modules/authorizationApi";
+import { useTypedDispatch } from "../../hooks/useRedux";
+import { setToken } from "../Authorization/authorizationSlice";
 
 function App() {
+    const {data, isSuccess} = useFetchUserDataQuery();
+    const dispatch = useTypedDispatch();
+
+    useEffect(() => {
+        if(isSuccess && data)
+            dispatch(setToken(data))
+        console.log(data)
+    }, [isSuccess, data])
 
   return (
     <div className="App">

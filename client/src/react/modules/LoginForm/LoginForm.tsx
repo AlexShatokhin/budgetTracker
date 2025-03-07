@@ -29,7 +29,8 @@ const Login = () => {
     }
 
     const loginSuccess = (e : AuthenticationResponseType) => {
-        dispatch(setToken({token: e.token, email})); 
+        dispatch(setToken({email})); 
+        localStorage.setItem("token", JSON.stringify(e.token));
         setServerMessage(e.message);    
         navigate("/home")
     }

@@ -54,6 +54,25 @@ class authService {
         }
     }
 
+    async me(req, res){
+        try {
+            const prisma = new PrismaClient();
+            const user = await prisma.users.findUnique({
+                where: {id: req.userID},
+                select: {
+                    email: true,
+                }
+            });
+            res.status(200).json({
+                message: 'User details',
+                email: user.email
+            })
+        } catch (err) {
+            console.log(err);
+            res.status(500).json({message: 'Internal server error'});
+        }
+    }
+
 }
 
 module.exports = new authService();

@@ -3,7 +3,7 @@ import { Navigate, Outlet } from "react-router-dom"
 
 
 const PrivateRoute : FC = () => {
-    const storedUser = sessionStorage.getItem("user");
+    const storedUser = localStorage.getItem("token");
     return storedUser && storedUser !== "undefined" ? <Outlet /> : <Navigate to="/" />
 }
 
