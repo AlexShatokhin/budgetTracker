@@ -1,10 +1,10 @@
-import { FC } from "react";
+import { DetailedHTMLProps, FC, InputHTMLAttributes } from "react";
 import {BiShow, BiHide} from "react-icons/bi";
 import "./input.scss"
 import { colors } from "../../../constants/colors";
 import useToggle from "../../hooks/useToggle";
 
-type InputPropsType = {
+type InputPropsType = InputHTMLAttributes<HTMLInputElement> & {
     className?: string,
     placeholder?: string,
     type?: string,

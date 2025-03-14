@@ -8,6 +8,8 @@ import ComposedTable from "../../components/Table/ComposedTable";
 import Wrapper from "../../UI/Wrapper/Wrapper";
 import Modal from "../../UI/Modal/Modal";
 import useToggle from "../../hooks/useToggle";
+import AddTransactionForm from "../../modules/AddTransactionForm/AddTransactionForm";
+import { AmountType } from "../../types/amountType";
 
 const options = [
     { value: 'Last Week', label: 'Last Week' },
@@ -31,11 +33,11 @@ const TransactionsPage = () => {
                     <div className="transactions-wrapper">
                         <div className="transactions-stats">
                             <TransactionStatsItem 
-                                type="INCOME"
+                                type={AmountType.INCOME}
                                 value={9999.99}/>
                                 
                             <TransactionStatsItem 
-                                type="EXPENSE"
+                                type={AmountType.EXPENSE}
                                 value={999.99}/>
                         </div>
 
@@ -56,7 +58,7 @@ const TransactionsPage = () => {
                     title="Add transaction"
                     onClose={toggleIsOpen}
                     isOpen = {isOpen}>
-                        <h2>Hello!</h2>
+                        <AddTransactionForm />
                 </Modal>
             </Layout>
         </section>
