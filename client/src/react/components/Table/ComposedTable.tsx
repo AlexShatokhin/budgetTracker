@@ -160,7 +160,7 @@ const ComposedTable = () => {
 		},
 	  ];
   return (
-		<>
+		<div className="table-container">
 			<CompactTable
 				columns={COLUMNS}
 				data={tableData} 
@@ -182,7 +182,7 @@ const ComposedTable = () => {
 					</button>
 				</span>
 			</div>
-		</>
+		</div>
   );
 };
 

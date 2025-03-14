@@ -6,6 +6,8 @@ import TransactionStatsItem from "../../components/TransactionStatsItem/Transact
 import Select from "react-select";
 import ComposedTable from "../../components/Table/ComposedTable";
 import Wrapper from "../../UI/Wrapper/Wrapper";
+import Modal from "../../UI/Modal/Modal";
+import useToggle from "../../hooks/useToggle";
 
 const options = [
     { value: 'Last Week', label: 'Last Week' },
@@ -14,12 +16,14 @@ const options = [
 ];
   
 const TransactionsPage = () => {
+    const [isOpen, toggleIsOpen] = useToggle(false);
     return (
         <section className="transactions">
             <Layout>
                 <h1>Transactions</h1>
                 <p>Welcome to your transactions!</p>
                 <Button
+                    onClick={toggleIsOpen}
                     title={<><GoPlus size={25}/> <span>Add transaction</span></>} 
                     className="add-transaction"/>
 
@@ -43,10 +47,17 @@ const TransactionsPage = () => {
                         </div>
                     </div>
                     
-                    <Wrapper title="Transaction History" width="78vw" height="68vh">
+                    <Wrapper title="Transaction History" width="78vw" height="70vh">
                         <ComposedTable />
                     </Wrapper>
                 </div>
+
+                <Modal 
+                    title="Add transaction"
+                    onClose={toggleIsOpen}
+                    isOpen = {isOpen}>
+                        <h2>Hello!</h2>
+                </Modal>
             </Layout>
         </section>
     )
