@@ -15,6 +15,7 @@ const authorizationSlice = createSlice({
         removeToken(state) {
             state.email = "";
             state.isAuth = false;
+            localStorage.removeItem("token")
         }
     }   
 })

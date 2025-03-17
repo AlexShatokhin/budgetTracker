@@ -57,8 +57,9 @@ const TransactionsPage = () => {
                 <Modal 
                     title="Add transaction"
                     onClose={toggleIsOpen}
+                    height="300px"
                     isOpen = {isOpen}>
-                        <AddTransactionForm />
+                        <AddTransactionForm onClose={toggleIsOpen}/>
                 </Modal>
             </Layout>
         </section>

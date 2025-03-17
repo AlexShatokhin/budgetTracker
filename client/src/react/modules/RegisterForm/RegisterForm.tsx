@@ -8,7 +8,6 @@ import { useUserRegistrationMutation } from "../../api/modules/authorizationApi"
 
 import "./register_form.scss"
 import { colors } from "../../../constants/colors";
-import { set } from "zod";
 
 const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 

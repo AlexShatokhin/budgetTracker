@@ -5,17 +5,20 @@ import { routes } from "./routes/routes";
 import { useEffect } from "react";
 import { useFetchUserDataQuery } from "../../api/modules/authorizationApi";
 import { useTypedDispatch } from "../../hooks/useRedux";
-import { setToken } from "../Authorization/authorizationSlice";
+import { removeToken, setToken } from "../Authorization/authorizationSlice";
 
 function App() {
-    const {data, isSuccess} = useFetchUserDataQuery();
+    const {data, isSuccess, isError, isLoading} = useFetchUserDataQuery();
     const dispatch = useTypedDispatch();
 
     useEffect(() => {
-        if(isSuccess && data)
-            dispatch(setToken(data))
-        console.log(data)
-    }, [isSuccess, data])
+        if(!isLoading){
+            if(isSuccess && data)
+                dispatch(setToken(data))
+            if(isError)
+                dispatch(removeToken())
+        }
+    }, )
 
   return (
     <div className="App">

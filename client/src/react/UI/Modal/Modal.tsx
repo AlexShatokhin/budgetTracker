@@ -16,7 +16,7 @@ const Modal : FC<ModalProps> = ({title, isOpen, onClose, children, width, height
         <div
             onClick={e => (e.target as HTMLDivElement).classList.contains("modal") && onClose()} 
             className={"modal " + (isOpen ? "modal-open" : "")}>
-            <div style={{width, height}} className="modal__wrapper">
+            <div style={{width, minHeight: height}} className="modal__wrapper">
                 <button onClick={onClose} className="modal__close"><IoIosClose size={30}/></button>
                 <div className="modal__header">
                     <span>{title}</span>
