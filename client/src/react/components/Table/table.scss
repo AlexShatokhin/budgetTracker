@@ -15,6 +15,15 @@ thead{
             padding-bottom: 10px;
         }
     }
+    th div span{
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+        
+        svg {
+            margin-right: 10px;
+        }
+    }
 }
 
 tbody{

@@ -1,8 +1,11 @@
 import { CompactTable } from "@table-library/react-table-library/compact";
 import {usePagination} from '@table-library/react-table-library/pagination';
 import { useRowSelect } from "@table-library/react-table-library/select";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { FaCalendar, FaChevronLeft, FaChevronRight, FaMoneyBillWave } from "react-icons/fa";
+import { BsChatSquareTextFill } from "react-icons/bs";
+import { FiTable } from "react-icons/fi";
 import { colors } from "../../../constants/colors";
+
 
 const data = [
 	{
@@ -139,7 +142,7 @@ const ComposedTable = () => {
 
 	const COLUMNS = [
 		{ 
-			label: "Date", 
+			label: <span><FaCalendar /> Date</span>, 
 			renderCell: (item : any) => item.date.toLocaleDateString('en-US', {
 			year: 'numeric',
 			month: '2-digit',
@@ -148,14 +151,14 @@ const ComposedTable = () => {
 			select: true 
 		},
 		{
-		  label: "Description",
+		  label: <span><BsChatSquareTextFill /> Description</span> ,
 		  renderCell: (item : any) => item.description,
 		},
-		{ label: "Amount", 
-			renderCell: (item : any) => item.amount 
+		{ label: <span><FaMoneyBillWave /> Amount</span>, 
+			renderCell: (item : any) => item.amount + " $" 
 		},
 		{
-		  label: "Category",
+		  label: <span><FiTable /> Category</span> ,
 		  renderCell: (item : any) => item.category,
 		},
 	  ];

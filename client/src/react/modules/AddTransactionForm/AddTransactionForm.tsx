@@ -65,8 +65,8 @@ const AddTransactionForm : FC<AddTransactionFormProps> = ({onClose}) => {
                 {getFirstError()}
             </div>
             <div className="transaction-form__buttons">
-                <Button onClick={() => {onClose(); reset()}} className="transaction-form__button transaction-form__cancel" title={"cancel"}/>
-                <Button className="transaction-form__button transaction-form__submit" type="submit" title={"submit"}/>
+                <Button onClick={() => {onClose(); reset()}} className="transaction-form__button transaction-form__cancel" title={"Cancel"}/>
+                <Button className="transaction-form__button transaction-form__submit" type="submit" title={"Submit"}/>
             </div>
         </form>
     )
