@@ -13,10 +13,14 @@ export const transactionsApi = createApi({
                 url: "/transactions",
                 body
             })
+        }),
+        getTransactions: build.query<any, void>({
+            query: () => "/transactions"
         })
     })
 })
 
 export const {
-    useAddNewTransactionMutation
+    useAddNewTransactionMutation,
+    useGetTransactionsQuery
 } = transactionsApi

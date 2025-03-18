@@ -5,9 +5,10 @@ import { FaCalendar, FaChevronLeft, FaChevronRight, FaMoneyBillWave } from "reac
 import { BsChatSquareTextFill } from "react-icons/bs";
 import { FiTable } from "react-icons/fi";
 import { colors } from "../../../constants/colors";
+import { useGetTransactionsQuery } from "../../api/modules/transactionsApi";
 
 
-const data = [
+const dataTest = [
 	{
 	  id: "1",
 	  date: new Date('2025-02-13'),
@@ -131,14 +132,19 @@ const data = [
   ];
   
 const ComposedTable = () => {
-	const tableData = {nodes: data}
+	const {data} = useGetTransactionsQuery();
+	const convertedData = data.result?.map((item : any) => ({id: item.id, date: new Date(item.date), description: item.note, amount: item.amount, category: item.category}));
+	
+	const tableData = {nodes: convertedData}
+	const select = useRowSelect(tableData);
 	const pagination= usePagination(tableData, {
 		state: {
 			page: 0,
 			size: 10
 		}
 	});
-	const select = useRowSelect(tableData);
+
+	console.log(convertedData);
 
 	const COLUMNS = [
 		{ 
