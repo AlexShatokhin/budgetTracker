@@ -1,14 +1,16 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { authorizationApi } from "../api/modules/authorizationApi";
 import authorizationSlice from "../pages/Authorization/authorizationSlice"
+import { transactionsApi } from "../api/modules/transactionsApi";
 
 const store = configureStore({
     reducer: {
         [authorizationApi.reducerPath]: authorizationApi.reducer,
+        [transactionsApi.reducerPath]: transactionsApi.reducer,
         authorization: authorizationSlice
     },
     middleware: (getDefaultMiddleware) => 
-        getDefaultMiddleware().concat(authorizationApi.middleware)
+        getDefaultMiddleware().concat(authorizationApi.middleware, transactionsApi.middleware)
 });
 
 
