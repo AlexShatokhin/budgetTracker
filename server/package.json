@@ -15,6 +15,9 @@
   "name": "server",
   "version": "1.0.0",
   "main": "./src/index.js",
+  "prisma": {
+    "schema": "./src/prisma/schema.prisma"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon ./src/index.js"

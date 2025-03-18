@@ -20,7 +20,7 @@ const Wrapper : FC<WrapperProps> = ({title, children, className, width = "100%",
         <div style={{width, height}} className={"wrapper " + className}>
             <div className="wrapper__title">
                 {title}
-                {titleInfo && titleInfo.length > 20 && <IoInformationCircleOutline onMouseEnter={toggleIsHovered} onMouseLeave={toggleIsHovered} className="wrapper__icon"/>}
+                {titleInfo && titleInfo.length > 20 && <IoInformationCircleOutline onMouseEnter={toggleIsHovered} onMouseLeave={toggleIsHovered} className="wrapper__icon"/> }
                 <div className={"wrapper-info " + (isHovered ? "show" : "")}>{titleInfo}</div>
             </div>
             {children}
