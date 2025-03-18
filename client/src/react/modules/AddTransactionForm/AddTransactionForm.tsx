@@ -5,6 +5,7 @@ import TransactionFormInput from "./TransactionFormItems/TransactionFormInput";
 import TransactionFormSelect from "./TransactionFormItems/TransactionFormSelect";
 import { AmountType } from "../../types/amountType";
 import "./add_transaction.scss"
+import { useAddNewTransactionMutation } from "../../api/modules/transactionsApi";
 
 type FormInput = {
     amount: number;
@@ -21,7 +22,7 @@ type AddTransactionFormProps = {
 
 
 const AddTransactionForm : FC<AddTransactionFormProps> = ({onClose}) => {
-    const {register, handleSubmit, formState, reset} = useForm<FormInput>({
+    const {register, handleSubmit, formState,  formState : {isDirty, isSubmitSuccessful}, reset} = useForm<FormInput>({
         defaultValues: {
             amount: 0.0,
             type: AmountType.INCOME,
@@ -31,11 +32,19 @@ const AddTransactionForm : FC<AddTransactionFormProps> = ({onClose}) => {
             description: ""
         }
     });
-    const onSubmit = (data : any) => console.log(data);
+    const [addTransaction, {isError}] = useAddNewTransactionMutation();
     const pattern = new RegExp(/^\d+$/);
+    const onSubmit = async (data : any) => {
+        try {
+            await addTransaction(data).unwrap();
+            reset();
+        } catch (error) {
+            console.log(error)
+        }
+    };
+
 
     useEffect(() => {
-     
         return () => {
             console.log("unmount")
             reset();
@@ -74,7 +83,12 @@ const AddTransactionForm : FC<AddTransactionFormProps> = ({onClose}) => {
                 <TransactionFormInput type="textarea" style={{height: 80}} id="description" label="Description" {...register("description")}/>
             </div>
             <div className="transaction-form__errors">
-                {getFirstError()}
+                {getFirstError()} 
+                <br />
+                {isError && <>Something went wrong</>}
+            </div>
+            <div className="transaction-form__success" style={{opacity: isSubmitSuccessful && !isDirty ? "1" : "0"}}>
+                Transaction added successfully!
             </div>
             <div className="transaction-form__buttons">
                 <Button onClick={() => {onClose(); reset()}} className="transaction-form__button transaction-form__cancel" title={"Cancel"}/>

@@ -25,20 +25,23 @@ class transactionService {
                 type,
                 category,
                 date, 
-                note
+                time,
+                description
             } = req.body;
-            client.transactions.create({
-                user_id: req.userID,
-                amount,
-                type,
-                category,
-                date,
-                note
+            await client.transactions.create({
+                data: {
+                    user_id: req.userID,
+                    amount,
+                    type: type.toLowerCase(),
+                    category,
+                    date: new Date(date + "T" + time + ":00Z"),
+                    note: description
+                }
             })
             res.status(200).json({message: "Transaction added successfully"})
         } catch(err){
             console.log(err);
-            res.status(500).json("Internal Server Error");
+            res.status(500).json({message: "Internal Server Error"});
         }
     }
 
