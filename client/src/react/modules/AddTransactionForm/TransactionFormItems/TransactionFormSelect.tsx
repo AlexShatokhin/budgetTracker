@@ -6,15 +6,19 @@ import "./transaction_input.scss"
 type TransactionFormSelectProps = SelectHTMLAttributes<HTMLSelectElement> & {
     id: string;
     label: string;
+    values: {value: string, label: string}[];
+    defaultValue: string;
 }
 
-const TransactionFormSelect : FC<TransactionFormSelectProps> = ({id, label, ...props}) => {
+const TransactionFormSelect : FC<TransactionFormSelectProps> = ({id, label, values, ...props}) => {
     return (
         <TransactionFormWrapper id={id} label={label}>
             <select id={id} {...props} className={"transaction-input transaction-select " + props.className}>
-                <option value="1">Option 1</option>
-                <option value="2">Option 2</option>
-                <option value="3">Option 3</option>
+                {
+                    values.map((value) => {
+                        return <option key={value.value} value={value.value}>{value.label}</option>
+                    })
+                }
             </select>
         </TransactionFormWrapper>
     )

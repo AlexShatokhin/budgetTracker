@@ -11,6 +11,7 @@ type FormInput = {
     type: AmountType;
     category: string;
     date: string;
+    time: string;
     description: string;
 }
 
@@ -26,6 +27,7 @@ const AddTransactionForm : FC<AddTransactionFormProps> = ({onClose}) => {
             type: AmountType.INCOME,
             category: "",
             date: new Date().toISOString().split("T")[0],
+            time: new Date().toISOString().split("T")[1].slice(0,5),
             description: ""
         }
     });
@@ -56,9 +58,19 @@ const AddTransactionForm : FC<AddTransactionFormProps> = ({onClose}) => {
         <form className="transaction-form" onSubmit={handleSubmit(onSubmit)}>
             <div className="transaction-form__wrapper">
                 <TransactionFormInput id="amount" label="Amount" {...register("amount", {required: true, pattern: {value: pattern, message: "Type correct amount"}})}/>
-                <TransactionFormSelect id="type" label="Type" {...register("type", {required: true})}/>
+                <TransactionFormSelect 
+                    defaultValue={AmountType.INCOME}
+                    values={[{value: AmountType.INCOME, label: "Income"}, {value: AmountType.EXPENSE, label: "Expense"}]}
+                    id="type" 
+                    label="Type" 
+                    {...register("type", {required: true})}/>
                 <TransactionFormInput id="category" label="Category" {...register("category", {required: true})}/>
-                <TransactionFormInput type="date" id="date" label="Date" {...register("date")}/>
+
+                <div className="datetime">
+                    <TransactionFormInput type="date" id="date" label="Date" {...register("date")}/>
+                    <TransactionFormInput type="time" id="time" label="Time" {...register("time")}/>
+                </div>
+
                 <TransactionFormInput type="textarea" style={{height: 80}} id="description" label="Description" {...register("description")}/>
             </div>
             <div className="transaction-form__errors">
