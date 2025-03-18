@@ -1,4 +1,4 @@
-import { FC, SelectHTMLAttributes } from "react";
+import { FC, forwardRef, SelectHTMLAttributes } from "react";
 import TransactionFormWrapper from "./TransactionFormWrapper";
 
 import "./transaction_input.scss"
@@ -10,10 +10,10 @@ type TransactionFormSelectProps = SelectHTMLAttributes<HTMLSelectElement> & {
     defaultValue: string;
 }
 
-const TransactionFormSelect : FC<TransactionFormSelectProps> = ({id, label, values, ...props}) => {
+const TransactionFormSelect : FC<TransactionFormSelectProps> = forwardRef<HTMLSelectElement, TransactionFormSelectProps>(({id, label, values, ...props}, ref) => {
     return (
         <TransactionFormWrapper id={id} label={label}>
-            <select id={id} {...props} className={"transaction-input transaction-select " + props.className}>
+            <select id={id} ref={ref as any} {...props} className={"transaction-input transaction-select " + props.className}>
                 {
                     values.map((value) => {
                         return <option key={value.value} value={value.value}>{value.label}</option>
@@ -22,6 +22,6 @@ const TransactionFormSelect : FC<TransactionFormSelectProps> = ({id, label, valu
             </select>
         </TransactionFormWrapper>
     )
-}
+})
 
 export default TransactionFormSelect;

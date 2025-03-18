@@ -36,6 +36,7 @@ const AddTransactionForm : FC<AddTransactionFormProps> = ({onClose}) => {
     const pattern = new RegExp(/^\d+$/);
     const onSubmit = async (data : any) => {
         try {
+            console.log(data);
             await addTransaction(data).unwrap();
             reset();
         } catch (error) {

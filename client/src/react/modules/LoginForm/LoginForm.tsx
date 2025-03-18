@@ -25,7 +25,7 @@ const Login = () => {
         e.preventDefault();
         request({email, password}).unwrap()
         .then(loginSuccess)
-        .catch(e => setServerMessage(e.data));
+        .catch(e => setServerMessage(e.data.message));
     }
 
     const loginSuccess = (e : AuthenticationResponseType) => {

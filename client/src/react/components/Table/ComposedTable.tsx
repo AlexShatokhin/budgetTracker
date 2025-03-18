@@ -9,7 +9,8 @@ import { useGetTransactionsQuery } from "../../api/modules/transactionsApi";
 
 const ComposedTable = () => {
 	const {data} = useGetTransactionsQuery();
-	const convertedData = data?.result?.map((item : any) => ({id: item.id, date: new Date(item.date), description: item.note, amount: item.amount, category: item.category})) || [];
+	console.log(data)
+	const convertedData = data?.result?.map((item : any) => ({id: item.id, date: new Date(item.date), description: item.note, amount: item.amount, category: item.category, type: item.type})) || [];
 	
 	const tableData = {nodes: convertedData}
 	const select = useRowSelect(tableData);
@@ -37,7 +38,7 @@ const ComposedTable = () => {
 		  renderCell: (item : any) => item.description,
 		},
 		{ label: <span><FaMoneyBillWave /> Amount</span>, 
-			renderCell: (item : any) => item.amount + " $" 
+			renderCell: (item : any) => (item.type === "expense" ? " - " : "") + item.amount + " $" 
 		},
 		{
 		  label: <span><FiTable /> Category</span> ,
