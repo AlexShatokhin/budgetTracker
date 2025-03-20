@@ -10,6 +10,7 @@ import useToggle from "../../hooks/useToggle";
 import AddTransactionForm from "../../modules/AddTransactionForm/AddTransactionForm";
 import { AmountType } from "../../types/amountType";
 import TransactionTable from "../../modules/TransactionTable/TransactionTable";
+import Transactions from "../../modules/Transactions/Transactions";
 
 const options = [
     { value: 'Last Week', label: 'Last Week' },
@@ -28,33 +29,7 @@ const TransactionsPage = () => {
                     onClick={toggleIsOpen}
                     title={<><GoPlus size={25}/> <span>Add transaction</span></>} 
                     className="add-transaction"/>
-
-                <div className="transactions-content">
-                    <div className="transactions-wrapper">
-                        <div className="transactions-stats">
-                            <TransactionStatsItem 
-                                type={AmountType.INCOME}
-                                value={9999.99}/>
-                                
-                            <TransactionStatsItem 
-                                type={AmountType.EXPENSE}
-                                value={999.99}/>
-                        </div>
-
-                        <div className="transactions-select">
-                            <Select 
-                                className="select"
-                                defaultValue={options[1]}
-                                options={options}/>
-                        </div>
-                    </div>
-                    
-                    <Wrapper title="Transaction History" width="78vw" height="70vh">
-                        {/* <ComposedTable /> */}
-                        <TransactionTable />
-                    </Wrapper>
-                </div>
-
+                <Transactions />
                 <Modal 
                     title="Add transaction"
                     onClose={toggleIsOpen}

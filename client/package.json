@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.14.0",
+    "@react-spring/web": "^9.7.5",
     "@reduxjs/toolkit": "^2.4.0",
     "@table-library/react-table-library": "^4.1.12",
     "@testing-library/jest-dom": "^5.17.0",

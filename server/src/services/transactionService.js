@@ -9,7 +9,14 @@ class transactionService {
                     user_id: req.userID
                 }
             });
-            res.status(200).json({message: "Transactions sended successfully", result: transactions})
+            const totalAmounts = {
+                income: 0,
+                expense: 0
+            }
+            transactions.forEach(transaction => {
+                totalAmounts[transaction.type] += +transaction.amount;
+            })
+            res.status(200).json({message: "Transactions sended successfully", result: transactions, total: totalAmounts})
     
         } catch(err){
             console.log(err);

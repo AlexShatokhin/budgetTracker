@@ -1,6 +1,7 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import baseQuery from "../baseQuery";
-import { TransactionClientType, TransactionServerType } from "../../types/TransactionType";
+import { TransactionClientType } from "../../types/TransactionType";
+import { TransactionServerResponse } from "../../types/TransactionServerResponse";
 
 
 export const transactionsApi = createApi({
@@ -14,7 +15,7 @@ export const transactionsApi = createApi({
                 body
             })
         }),
-        getTransactions: build.query<{message: string, result: TransactionServerType[]}, void>({
+        getTransactions: build.query<TransactionServerResponse, void>({
             query: () => "/transactions"
         })
     })
