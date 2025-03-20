@@ -1,19 +1,60 @@
+import {FC} from 'react';
 import { CompactTable } from "@table-library/react-table-library/compact";
 import {usePagination} from '@table-library/react-table-library/pagination';
 import { useRowSelect } from "@table-library/react-table-library/select";
-import { FaCalendar, FaChevronLeft, FaChevronRight, FaMoneyBillWave } from "react-icons/fa";
-import { BsChatSquareTextFill } from "react-icons/bs";
-import { FiTable } from "react-icons/fi";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import { colors } from "../../../constants/colors";
-import { useGetTransactionsQuery } from "../../api/modules/transactionsApi";
 
-const ComposedTable = () => {
-	const {data} = useGetTransactionsQuery();
-	console.log(data)
-	const convertedData = data?.result?.map((item : any) => ({id: item.id, date: new Date(item.date), description: item.note, amount: item.amount, category: item.category, type: item.type})) || [];
-	
-	const tableData = {nodes: convertedData}
+import { useTheme } from "@table-library/react-table-library/theme";
+import { useSort, SortToggleType } from "@table-library/react-table-library/sort";
+
+import { TbCaretUpDownFilled, TbCaretDownFilled, TbCaretUpFilled } from "react-icons/tb";
+
+import { TableNode } from '@table-library/react-table-library/types/table';
+import { Column } from '@table-library/react-table-library/types/compact';
+
+type ComposedTableProps = {
+	columns: Column<TableNode>[];
+	sortFns: {[key: string]: (array: any[]) => any[]};
+	data: any;
+}
+
+const ComposedTable : FC<ComposedTableProps> = ({columns, sortFns, data}) => {	
+	const tableData = {nodes: data}
 	const select = useRowSelect(tableData);
+	const theme = useTheme([{
+		Row: `
+			transition: background-color 0.2s;
+			&:hover {
+				background-color: rgba(0,0,0, 0.05);
+			}
+			&.row-select-selected{
+				background-color: rgba(0,0,0, 0.1);
+			}
+		`,
+		Cell: ``,
+		HeaderCell: ``,
+		Table: `
+			grid-template-columns: 40px minmax(0px, 1fr) minmax(0px, 2fr) minmax(0px, 1fr) minmax(0px, 1fr);
+		`
+	}]);
+	const onSortChange = (action : any, state : any) => console.log(action, state) 
+	const sort = useSort(
+		tableData, 
+		{
+			onChange: onSortChange
+		},
+		{
+		sortIcon: {
+			iconDefault: <TbCaretUpDownFilled />,
+			iconUp: <TbCaretUpFilled />,
+			iconDown: <TbCaretDownFilled />,
+		},
+		sortToggleType: SortToggleType.AlternateWithReset,
+		sortFns
+	})
+
+
 	const pagination= usePagination(tableData, {
 		state: {
 			page: 0,
@@ -21,37 +62,15 @@ const ComposedTable = () => {
 		}
 	});
 
-	console.log(convertedData);
-
-	const COLUMNS = [
-		{ 
-			label: <span><FaCalendar /> Date</span>, 
-			renderCell: (item : any) => item.date.toLocaleDateString('en-US', {
-			year: 'numeric',
-			month: '2-digit',
-			day: '2-digit',
-			}), 
-			select: true 
-		},
-		{
-		  label: <span><BsChatSquareTextFill /> Description</span> ,
-		  renderCell: (item : any) => item.description,
-		},
-		{ label: <span><FaMoneyBillWave /> Amount</span>, 
-			renderCell: (item : any) => (item.type === "expense" ? " - " : "") + item.amount + " $" 
-		},
-		{
-		  label: <span><FiTable /> Category</span> ,
-		  renderCell: (item : any) => item.category,
-		},
-	  ];
   return (
 		<div className="table-container">
 			<CompactTable
-				columns={COLUMNS}
+				theme={theme}
+				columns={columns}
 				data={tableData} 
 				pagination={pagination}
 				select={select}
+				sort={sort}
 			/>
 
 			<div className="table-pagination">

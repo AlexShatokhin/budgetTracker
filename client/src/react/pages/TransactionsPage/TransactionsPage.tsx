@@ -4,12 +4,12 @@ import "./transaction_page.scss";
 import Button from "../../UI/Button/Button";
 import TransactionStatsItem from "../../components/TransactionStatsItem/TransactionStatsItem";
 import Select from "react-select";
-import ComposedTable from "../../components/Table/ComposedTable";
 import Wrapper from "../../UI/Wrapper/Wrapper";
 import Modal from "../../UI/Modal/Modal";
 import useToggle from "../../hooks/useToggle";
 import AddTransactionForm from "../../modules/AddTransactionForm/AddTransactionForm";
 import { AmountType } from "../../types/amountType";
+import TransactionTable from "../../modules/TransactionTable/TransactionTable";
 
 const options = [
     { value: 'Last Week', label: 'Last Week' },
@@ -50,7 +50,8 @@ const TransactionsPage = () => {
                     </div>
                     
                     <Wrapper title="Transaction History" width="78vw" height="70vh">
-                        <ComposedTable />
+                        {/* <ComposedTable /> */}
+                        <TransactionTable />
                     </Wrapper>
                 </div>
 
