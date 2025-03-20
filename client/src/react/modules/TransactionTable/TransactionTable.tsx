@@ -20,7 +20,7 @@ const TransactionTable : FC<TransactionTableProps> = ({data}) => {
     const COLUMNS  = [
         { 
             label: <span><FaCalendar /> Date</span>, 
-            renderCell: (item : any) => item.date.toLocaleDateString('en-US', {
+            renderCell: (item : any) => item.date.toLocaleDateString('en-GB', {
             year: 'numeric',
             month: '2-digit',
             day: '2-digit',

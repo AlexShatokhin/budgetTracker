@@ -4,9 +4,18 @@ class transactionService {
     async getTransactions(req, res){
         try {
             const client = new PrismaClient();
+            const startDate = req.query.from;
+            const endDate = req.query.to;
             const transactions = await client.transactions.findMany({
                 where: {
-                    user_id: req.userID
+                    user_id: req.userID,
+                    date: {
+                        gte: new Date(startDate),
+                        lte: new Date(endDate)
+                    }
+                },
+                orderBy: {
+                    date: 'desc'
                 }
             });
             const totalAmounts = {

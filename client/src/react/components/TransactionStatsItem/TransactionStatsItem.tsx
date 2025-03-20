@@ -14,7 +14,7 @@ const TransactionStatsItem : FC<TransactionStatsItemProps> = ({type, value}) => 
         from: { number: 0 },
         number: value,
         delay: 200,
-        config: { duration: 2000 },
+        config: { duration: 1500 },
     });
 
     
