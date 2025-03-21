@@ -39,7 +39,7 @@ const getTimeInterval = (value: string) => {
 const Transactions = () => {
     const [selectedOption, setSelectedOption] = useState<SingleValue<{value: string, label: string}>>(options[1]);
 
-    const {data} = useGetTransactionsQuery(getTimeInterval(selectedOption?.value || 'month'));
+    const {data, isFetching} = useGetTransactionsQuery(getTimeInterval(selectedOption?.value || 'month'));
     const convertedTableData : TransactionTableItem[] = data?.result?.map((item : TransactionServerType) => ({id: item.id, date: new Date(item.date), description: item.note, amount: item.amount, category: item.category, type: item.type})) || [];
     const totalIncome = data?.total.income || 0;
     const totalExpense = data?.total.expense || 0; 
@@ -71,7 +71,9 @@ const Transactions = () => {
             </div>
             
             <Wrapper title="Transaction History" width="78vw" height="70vh">
-                <TransactionTable data={convertedTableData}/>
+                <TransactionTable 
+                    disabled={isFetching}
+                    data={convertedTableData}/>
             </Wrapper>
         </div>
     )

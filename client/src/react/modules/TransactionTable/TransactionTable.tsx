@@ -8,10 +8,11 @@ import { TableNode } from "@table-library/react-table-library";
 import { TransactionTableItem } from '../Transactions/TrasactionTableItemType';
 
 type TransactionTableProps = {
-    data: TransactionTableItem[]
+    data: TransactionTableItem[],
+    disabled?: boolean
 }
 
-const TransactionTable : FC<TransactionTableProps> = ({data}) => {
+const TransactionTable : FC<TransactionTableProps> = ({data, disabled = false}) => {
     const sortFunctions = {
         DATE: (array: TransactionTableItem[]) => array.sort((a, b) => +a.date - +b.date),
         AMOUNT: (array: TransactionTableItem[]) => array.sort((a, b) => a.amount - b.amount),
@@ -46,10 +47,12 @@ const TransactionTable : FC<TransactionTableProps> = ({data}) => {
       ];
 
     return (
-        <ComposedTable 
-            data={data}
-            sortFns={sortFunctions}
-            columns={COLUMNS as unknown as Column<TableNode>[]}/>
+        <div className={`transactions-table ${disabled ? "transactions-table-disabled" : ""}`}>
+            <ComposedTable 
+                data={data}
+                sortFns={sortFunctions}
+                columns={COLUMNS as unknown as Column<TableNode>[]}/>
+        </div>
     )
 }
 

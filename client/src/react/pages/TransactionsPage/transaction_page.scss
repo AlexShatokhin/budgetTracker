@@ -32,4 +32,12 @@
     .select{
         z-index: 10;
     }
+    &-table{
+        transition: 0.2s all;
+        &-disabled{
+            opacity: 0.5;
+            pointer-events: none;
+        }
+    }
+
 }
