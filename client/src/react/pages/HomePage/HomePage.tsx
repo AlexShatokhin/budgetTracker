@@ -1,12 +1,12 @@
 import FinanceChart from "../../components/FinanceChart/FinanceChat";
 import Layout from "../../components/Layout/Layout"
 import MonthlyChart from "../../components/MonthlyChart/MonthlyChart";
-import TransactionCompactTable from "../../components/Table/CompactTable";
 import { useTypedSelector } from "../../hooks/useRedux";
 import { Link } from "react-router-dom";
 import { IoChevronForwardSharp } from "react-icons/io5";
 import Wrapper from "../../UI/Wrapper/Wrapper";
 import "./homepage.scss"
+import CompactTransactionTable from "../../modules/TransactionTable/CompactTransactionTable";
 
 const HomePage = () => {
     const {email} = useTypedSelector(state => state.authorization);
@@ -21,7 +21,7 @@ const HomePage = () => {
                         <FinanceChart width="300px" height="350px"/>
                     </Wrapper>
                     <Wrapper className="transactions-compact" title="Recent Transactions" width="calc(100% - 450px)" height="350px">
-                        <TransactionCompactTable />
+                        <CompactTransactionTable />
                         <Link to="/transactions"> <span>View all</span> <IoChevronForwardSharp /></Link>
                     </Wrapper>
                 </div>

@@ -4,14 +4,16 @@ class transactionService {
     async getTransactions(req, res){
         try {
             const client = new PrismaClient();
-            const startDate = req.query.from;
-            const endDate = req.query.to;
+            const startDate = new Date(req.query.from);
+            startDate.setHours(2,0,0,0)
+            const endDate = new Date(req.query.to);
+            endDate.setHours(25, 59, 59, 999);
             const transactions = await client.transactions.findMany({
                 where: {
                     user_id: req.userID,
                     date: {
-                        gte: new Date(startDate),
-                        lte: new Date(endDate)
+                        gte: startDate,
+                        lte: endDate
                     }
                 },
                 orderBy: {
@@ -27,6 +29,33 @@ class transactionService {
             })
             res.status(200).json({message: "Transactions sended successfully", result: transactions, total: totalAmounts})
     
+        } catch(err){
+            console.log(err);
+            res.status(500).json({message: "Internal Server Error", result: []});
+        }
+    }
+
+    async getLatestTransactions(req, res){
+        try {
+            const client = new PrismaClient();
+            const limit = req.query.limit || 5;
+            const transactions = await client.transactions.findMany({
+                where: {
+                    user_id: req.userID
+                },
+                orderBy: {
+                    date: 'desc'
+                },
+                take: +limit
+            })
+            const totalAmounts = {
+                income: 0,
+                expense: 0
+            }
+            transactions.forEach(transaction => {
+                totalAmounts[transaction.type] += +transaction.amount;
+            })
+            res.status(200).json({message: "Transactions sended successfully", result: transactions, total: totalAmounts})
         } catch(err){
             console.log(err);
             res.status(500).json({message: "Internal Server Error", result: []});

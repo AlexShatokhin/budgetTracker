@@ -20,11 +20,16 @@ export const transactionsApi = createApi({
         getTransactions: build.query<TransactionServerResponse, {start: string, end: string}>({
             query: (time) => `/transactions?from=${time.start}&to=${time.end}`,
             providesTags: ["Transactions"],
+        }),
+        getLatestTransactions: build.query<TransactionServerResponse, number>({
+            query: (limit) => `/transactions/latest?limit=${limit}`,
+            providesTags: ["Transactions"],
         })
     })
 })
 
 export const {
     useAddNewTransactionMutation,
-    useGetTransactionsQuery
+    useGetTransactionsQuery,
+    useGetLatestTransactionsQuery
 } = transactionsApi
