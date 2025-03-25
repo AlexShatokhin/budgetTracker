@@ -24,6 +24,10 @@ export const transactionsApi = createApi({
         getLatestTransactions: build.query<TransactionServerResponse, number>({
             query: (limit) => `/transactions/latest?limit=${limit}`,
             providesTags: ["Transactions"],
+        }),
+        getMonthlyTransactions: build.query<{message: string, result: {month: string, income: number, expenses: number}[]}, void>({
+            query: () => `/transactions/monthly`,
+            providesTags: ["Transactions"],
         })
     })
 })
@@ -31,5 +35,6 @@ export const transactionsApi = createApi({
 export const {
     useAddNewTransactionMutation,
     useGetTransactionsQuery,
-    useGetLatestTransactionsQuery
+    useGetLatestTransactionsQuery,
+    useGetMonthlyTransactionsQuery
 } = transactionsApi

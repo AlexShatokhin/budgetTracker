@@ -62,6 +62,33 @@ class transactionService {
         }
     }
 
+    async getMonthlyTransactions(req, res){
+        try{
+            const client = new PrismaClient();
+            const result = await client.$queryRaw`
+                SELECT 
+                    DATE_FORMAT(date, '%Y-%m-01') AS month,
+                    SUM(CASE WHEN type = "expense" THEN amount ELSE 0 END) AS expenses,
+                    SUM(CASE WHEN type = "income" THEN amount ELSE 0 END) AS income
+                FROM transactions
+                WHERE date >= DATE_SUB(CURDATE(), INTERVAL 1 YEAR)
+                GROUP BY month
+                ORDER BY month;
+            `;
+            const convertedResult = result.map(item => {
+                return {
+                    month: new Intl.DateTimeFormat('en', { month: 'short' }).format(new Date(item.month)),
+                    income: +item.income,
+                    expenses: +item.expenses
+                }
+            })
+            res.status(200).json({message: "Monthly amounts sended successfully", result: convertedResult})
+        } catch(err){
+            console.log(err);
+            res.status(500).json({message: "Internal Server Error", result: []});
+        }
+    }
+
     async postTransaction(req, res){
         try {
             const client = new PrismaClient();
