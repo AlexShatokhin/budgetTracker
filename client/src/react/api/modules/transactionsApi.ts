@@ -30,7 +30,10 @@ export const transactionsApi = createApi({
             query: () => `/transactions/monthly`,
             providesTags: ["Transactions"],
         }),
-
+        getAmountsByCategory: build.query<{message: string, result: {category: string, amount: number, type: AmountType}[]}, void>({
+            query: () => `/transactions/amounts`,
+            providesTags: ["Transactions"],
+        }),
         getTransactionCategories: build.query<{message: string, result: {name: string, id: string, type: AmountType}[]}, void>({
             query: () => `/categories`,
             providesTags: ["Categories"],
@@ -43,5 +46,6 @@ export const {
     useGetTransactionCategoriesQuery,
     useGetTransactionsQuery,
     useGetLatestTransactionsQuery,
-    useGetMonthlyTransactionsQuery
+    useGetMonthlyTransactionsQuery,
+    useGetAmountsByCategoryQuery,
 } = transactionsApi

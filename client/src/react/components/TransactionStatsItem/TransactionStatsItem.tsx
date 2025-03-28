@@ -16,7 +16,6 @@ const TransactionStatsItem : FC<TransactionStatsItemProps> = ({type, value}) => 
         delay: 200,
         config: { duration: 1500 },
     });
-
     
     return (
         <div className="transaction_stat-item">

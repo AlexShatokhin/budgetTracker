@@ -3,6 +3,8 @@ import { Pie } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { colors } from "../../../constants/colors";
+import { useGetAmountsByCategoryQuery } from "../../api/modules/transactionsApi";
+import { AmountType } from "../../types/amountType";
 
 // Регистрация компонентов
 ChartJS.register(ArcElement, Tooltip, Legend, ChartDataLabels);
@@ -13,11 +15,16 @@ type FinanceChartProps = {
 }
 
 const FinanceChart : FC<FinanceChartProps> = ({width, height}) => {
+    const {data} = useGetAmountsByCategoryQuery();
+    const dataType = AmountType.EXPENSE;
+    const neededTransactions = data?.result.filter((transaction) => transaction.type.toUpperCase() === dataType);
+    console.log(neededTransactions);
+
     const chartData = {
-        labels: ["Food", "Transport", "Shopping", "Bills", "Others", "Entertainment"],
+        labels: neededTransactions?.map((transaction) => transaction.category) || [],
         datasets: [
             {
-                data: [300, 50, 100, 200, 100, 150],
+                data: neededTransactions?.map((transaction) => transaction.amount) || [],
                 backgroundColor: [
                     colors.darkblue,
                     colors.blue,
@@ -33,10 +40,10 @@ const FinanceChart : FC<FinanceChartProps> = ({width, height}) => {
     const chartOptions: any = {
         layout: {
             padding: {
-                top: 60,
-                bottom: 60,
-                left: 60,
-                right: 60
+                top: 50,
+                bottom: 50,
+                left: 50,
+                right: 50
             }
         },
         plugins: {
@@ -64,11 +71,11 @@ const FinanceChart : FC<FinanceChartProps> = ({width, height}) => {
                 color: '#000',
                 font: {
                     weight: '400',
-                    size: 15
+                    size: 12
                 },
                 align: "end",
                 anchor: "end",
-                offset: 10,
+                offset: 3,
             }
         }
     };

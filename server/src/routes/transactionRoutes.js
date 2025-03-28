@@ -5,6 +5,7 @@ const transactionService = require("../services/transactionService");
 routes.get("/transactions", authMiddleware, transactionService.getTransactions)
 routes.get("/transactions/latest", authMiddleware, transactionService.getLatestTransactions)
 routes.get("/transactions/monthly", authMiddleware, transactionService.getMonthlyTransactions)
+routes.get("/transactions/amounts", authMiddleware, transactionService.getAmountsByCategory)
 
 routes.post("/transactions", authMiddleware, transactionService.postTransaction);
 routes.put("/transactions/:transactionID", authMiddleware, transactionService.updateTransaction);

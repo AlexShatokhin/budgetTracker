@@ -89,9 +89,36 @@ class transactionService {
             `;
             const convertedResult = result.map(item => {
                 return {
-                    month: new Intl.DateTimeFormat('en', { month: 'short' }).format(new Date(item.month)),
+                    month: new Intl.DateTimeFormat('en', { month: 'long' }).format(new Date(item.month)),
                     income: +item.income,
                     expenses: +item.expenses
+                }
+            })
+            res.status(200).json({message: "Monthly amounts sended successfully", result: convertedResult})
+        } catch(err){
+            console.log(err);
+            res.status(500).json({message: "Internal Server Error", result: []});
+        }
+    }
+
+    async getAmountsByCategory(req, res){
+        try {
+            const client = new PrismaClient();
+            const result = await client.$queryRaw`
+                SELECT 
+                    categories.name AS category,
+                    SUM(CASE WHEN transactions.type = "expense" THEN transactions.amount ELSE 0 END) AS expenses,
+                    SUM(CASE WHEN transactions.type = "income" THEN transactions.amount ELSE 0 END) AS income
+                FROM transactions
+                JOIN categories ON transactions.category_id = categories.id
+                WHERE transactions.user_id = ${req.userID}
+                GROUP BY category;
+            `;
+            const convertedResult = result.map(item => {
+                return {
+                    category: item.category,
+                    type: item.expenses > item.income ? "expense" : "income",
+                    amount: item.expenses > item.income ? +item.expenses : +item.income
                 }
             })
             res.status(200).json({message: "Monthly amounts sended successfully", result: convertedResult})
@@ -114,13 +141,11 @@ class transactionService {
             } = req.body;
             await client.transactions.create({
                 data: {
-                    // user_id: req.userID,
                     amount,
                     type: type.toLowerCase(),
                     categories: {
                         connect: { id: +category },
                     },
-                    // category: +category,
                     date: new Date(date + "T" + time + ":00Z"),
                     note: description,
                     users: {
