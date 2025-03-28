@@ -12,19 +12,16 @@ ChartJS.register(ArcElement, Tooltip, Legend, ChartDataLabels);
 type FinanceChartProps = {
     width: string;
     height: string;
+    labels: string[];
+    data: number[];
 }
 
-const FinanceChart : FC<FinanceChartProps> = ({width, height}) => {
-    const {data} = useGetAmountsByCategoryQuery();
-    const dataType = AmountType.EXPENSE;
-    const neededTransactions = data?.result.filter((transaction) => transaction.type.toUpperCase() === dataType);
-    console.log(neededTransactions);
-
+const FinanceChart : FC<FinanceChartProps> = ({width, height, labels, data}) => {
     const chartData = {
-        labels: neededTransactions?.map((transaction) => transaction.category) || [],
+        labels,
         datasets: [
             {
-                data: neededTransactions?.map((transaction) => transaction.amount) || [],
+                data,
                 backgroundColor: [
                     colors.darkblue,
                     colors.blue,
@@ -81,7 +78,7 @@ const FinanceChart : FC<FinanceChartProps> = ({width, height}) => {
     };
 
     return (
-        <div style={{width, height}} className="expense-chart">
+        <div style={{width, height, margin: "0 auto"}} className="expense-chart">
             <Pie data={chartData} options={chartOptions} />
         </div>
     );
