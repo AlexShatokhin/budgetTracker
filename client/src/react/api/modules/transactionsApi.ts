@@ -2,12 +2,13 @@ import { createApi } from "@reduxjs/toolkit/query/react";
 import baseQuery from "../baseQuery";
 import { TransactionClientType } from "../../types/TransactionType";
 import { TransactionServerResponse } from "../../types/TransactionServerResponse";
+import { AmountType } from "../../types/amountType";
 
 
 export const transactionsApi = createApi({
     reducerPath: "transactionsApi",
     baseQuery,
-    tagTypes: ["Transactions"],
+    tagTypes: ["Transactions", "Categories"],
     endpoints: (build) => ({
         addNewTransaction: build.mutation<{message: string}, TransactionClientType>({
             query: (body) => ({
@@ -28,12 +29,18 @@ export const transactionsApi = createApi({
         getMonthlyTransactions: build.query<{message: string, result: {month: string, income: number, expenses: number}[]}, void>({
             query: () => `/transactions/monthly`,
             providesTags: ["Transactions"],
-        })
+        }),
+
+        getTransactionCategories: build.query<{message: string, result: {name: string, id: string, type: AmountType}[]}, void>({
+            query: () => `/categories`,
+            providesTags: ["Categories"],
+        }),
     })
 })
 
 export const {
     useAddNewTransactionMutation,
+    useGetTransactionCategoriesQuery,
     useGetTransactionsQuery,
     useGetLatestTransactionsQuery,
     useGetMonthlyTransactionsQuery

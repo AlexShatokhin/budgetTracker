@@ -8,24 +8,25 @@ datasource db {
 }
 
 model categories {
-  id             Int      @id @default(autoincrement())
-  user_id        Int
-  name           String   @db.VarChar(255)
-  monthly_budget Decimal? @db.Decimal(10, 2)
-  users          users    @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "categories_ibfk_1")
-
-  @@index([user_id], map: "user_id")
+  id           Int            @id @default(autoincrement())
+  name         String         @db.VarChar(255)
+  
+  transactions transactions[]
+  type    transactions_type
 }
 
 model transactions {
-  id       Int               @id @default(autoincrement())
-  user_id  Int
-  amount   Decimal           @db.Decimal(10, 2)
-  type     transactions_type
-  category String            @db.VarChar(255)
-  date     DateTime          @db.DateTime(0)
-  note     String?           @db.Text
-  users    users             @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "transactions_ibfk_1")
+  id      Int               @id @default(autoincrement())
+  user_id Int
+  amount  Decimal           @db.Decimal(10, 2)
+  type    transactions_type
+
+  category_id Int        @db.Int
+  categories  categories @relation(fields: [category_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "transactions_ibfk_2")
+
+  date  DateTime @db.DateTime(0)
+  note  String?  @db.Text
+  users users    @relation(fields: [user_id], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "transactions_ibfk_1")
 
   @@index([user_id], map: "user_id")
 }
@@ -34,7 +35,6 @@ model users {
   id           Int            @id @default(autoincrement())
   email        String         @unique(map: "email") @db.VarChar(255)
   password     String         @db.VarChar(255)
-  categories   categories[]
   transactions transactions[]
 }
 

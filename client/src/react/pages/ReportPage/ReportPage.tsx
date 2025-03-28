@@ -13,9 +13,6 @@ const ReportPage = () => {
                     <Wrapper title="Categoeies">
                         <p>Here you can see your categories</p>
                     </Wrapper>
-                    <Wrapper title="Savings">
-                        <p>Here you can see your savings</p>
-                    </Wrapper>
                 </div>
             </Layout>
         </section>

@@ -5,7 +5,8 @@ import TransactionFormInput from "./TransactionFormItems/TransactionFormInput";
 import TransactionFormSelect from "./TransactionFormItems/TransactionFormSelect";
 import { AmountType } from "../../types/amountType";
 import "./add_transaction.scss"
-import { useAddNewTransactionMutation } from "../../api/modules/transactionsApi";
+import { useAddNewTransactionMutation, useGetTransactionCategoriesQuery } from "../../api/modules/transactionsApi";
+import { get } from "node:http";
 
 type FormInput = {
     amount: number;
@@ -22,7 +23,7 @@ type AddTransactionFormProps = {
 
 
 const AddTransactionForm : FC<AddTransactionFormProps> = ({onClose}) => {
-    const {register, handleSubmit, formState,  formState : {isDirty, isSubmitSuccessful}, reset} = useForm<FormInput>({
+    const {register, handleSubmit, formState,  formState : {isDirty, isSubmitSuccessful}, reset, getValues, setValue, watch} = useForm<FormInput>({
         defaultValues: {
             amount: 0.0,
             type: AmountType.INCOME,
@@ -33,6 +34,7 @@ const AddTransactionForm : FC<AddTransactionFormProps> = ({onClose}) => {
         }
     });
     const [addTransaction, {isError}] = useAddNewTransactionMutation();
+    const {data, isFetching} = useGetTransactionCategoriesQuery();
     const pattern = new RegExp(/^\d+$/);
     const onSubmit = async (data : any) => {
         try {
@@ -47,10 +49,14 @@ const AddTransactionForm : FC<AddTransactionFormProps> = ({onClose}) => {
 
     useEffect(() => {
         return () => {
-            console.log("unmount")
             reset();
         }
     }, [])
+
+    const type = watch("type");
+    useEffect(() => {
+        setValue("category", "");
+    }, [type, setValue]);
 
     const getFirstError = () : string => {
         const formFields = Object.keys(formState.errors) as (keyof FormInput)[];
@@ -63,7 +69,7 @@ const AddTransactionForm : FC<AddTransactionFormProps> = ({onClose}) => {
         return error
     }
 
-
+    const selectData = data?.result.filter(category => getValues().type === category.type.toUpperCase()).map((category) => ({value: category.id, label: category.name})) || [];
     return (
         <form className="transaction-form" onSubmit={handleSubmit(onSubmit)}>
             <div className="transaction-form__wrapper">
@@ -74,8 +80,14 @@ const AddTransactionForm : FC<AddTransactionFormProps> = ({onClose}) => {
                     id="type" 
                     label="Type" 
                     {...register("type", {required: true})}/>
-                <TransactionFormInput id="category" label="Category" {...register("category", {required: true})}/>
-
+                {/* <TransactionFormInput id="category" label="Category" {...register("category", {required: true})}/> */}
+                <TransactionFormSelect 
+                    defaultValue={"0"}
+                    values={selectData}
+                    disabled={isFetching}
+                    id="category" 
+                    label="Category" 
+                    {...register("category", {required: true})}/>
                 <div className="datetime">
                     <TransactionFormInput type="date" id="date" label="Date" {...register("date")}/>
                     <TransactionFormInput type="time" id="time" label="Time" {...register("time")}/>

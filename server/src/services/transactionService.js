@@ -18,16 +18,24 @@ class transactionService {
                 },
                 orderBy: {
                     date: 'desc'
+                },
+                include: {
+                    categories: true
                 }
             });
             const totalAmounts = {
                 income: 0,
                 expense: 0
             }
+            const formattedTransactions = transactions.map(transaction => ({
+                ...transaction,
+                category: transaction.categories.name,
+            }));
+
             transactions.forEach(transaction => {
                 totalAmounts[transaction.type] += +transaction.amount;
             })
-            res.status(200).json({message: "Transactions sended successfully", result: transactions, total: totalAmounts})
+            res.status(200).json({message: "Transactions sended successfully", result: formattedTransactions, total: totalAmounts})
     
         } catch(err){
             console.log(err);
@@ -46,12 +54,16 @@ class transactionService {
                 orderBy: {
                     date: 'desc'
                 },
-                take: +limit
+                take: +limit,
+                include: {
+                    categories: true
+                }
             })
             const totalAmounts = {
                 income: 0,
                 expense: 0
             }
+            console.log(transactions);
             transactions.forEach(transaction => {
                 totalAmounts[transaction.type] += +transaction.amount;
             })
@@ -102,12 +114,18 @@ class transactionService {
             } = req.body;
             await client.transactions.create({
                 data: {
-                    user_id: req.userID,
+                    // user_id: req.userID,
                     amount,
                     type: type.toLowerCase(),
-                    category,
+                    categories: {
+                        connect: { id: +category },
+                    },
+                    // category: +category,
                     date: new Date(date + "T" + time + ":00Z"),
-                    note: description
+                    note: description,
+                    users: {
+                        connect: { id: req.userID }
+                    }
                 }
             })
             res.status(200).json({message: "Transaction added successfully"})

@@ -4,11 +4,7 @@ class categoryService {
     async getCategories(req, res) {
         try {
             const client = new PrismaClient();
-            const categories = await client.categories.findMany({
-                where: {
-                    user_id: req.userID
-                }
-            });
+            const categories = await client.categories.findMany();
             res.status(200).json({ message: "Categories retrieved successfully", result: categories });
         } catch (err) {
             console.log(err);
@@ -30,7 +26,7 @@ class categoryService {
             res.status(201).json({ message: "Category created successfully", result: newCategory });
         } catch (err) {
             console.log(err);
-            res.status(500).json("Internal Server Error");
+            res.status(500).json({message: "Internal Server Error"});
         }
     }
 
@@ -49,7 +45,7 @@ class categoryService {
             res.status(200).json({ message: "Category updated successfully", result: updatedCategory });
         } catch (err) {
             console.log(err);
-            res.status(500).json("Internal Server Error");
+            res.status(500).json({message: "Internal Server Error"});
         }
     }
 
@@ -63,7 +59,7 @@ class categoryService {
             res.status(200).json({ message: "Category deleted successfully" });
         } catch (err) {
             console.log(err);
-            res.status(500).json("Internal Server Error");
+            res.status(500).json({message: "Internal Server Error"});
         }
     }
 }
