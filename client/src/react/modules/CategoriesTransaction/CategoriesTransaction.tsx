@@ -6,7 +6,7 @@ import TotalChart from "./TotalChart";
 const labelColors = [colors.lightblue, colors.red, colors.purple, colors.green, colors.yellow, colors.darkgreen, colors.orange]
 
 const CategoriesTransaction = () => {
-    const {data, isFetching} = useGetTransactionGroupedByCategoryQuery({type: AmountType.EXPENSE, start: "2023-01-01", end: "2025-12-31"});
+    const {data} = useGetTransactionGroupedByCategoryQuery({type: AmountType.EXPENSE, start: "2023-01-01", end: "2025-12-31"});
     console.log(data?.result);
     const chartFormat = {
         labels: [""],
@@ -20,8 +20,8 @@ const CategoriesTransaction = () => {
         }) || []
     }
     return (
-        <div className="content">
-            {!isFetching ? <TotalChart data={chartFormat}/> : "Loading..."}
+        <div className="categories-content">
+            <TotalChart data={chartFormat}/>
         </div>
     )
 }
