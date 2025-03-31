@@ -16,5 +16,9 @@ export const colors = {
     darkblack: "#000000",
     mediumblack: "#343a40",
     lightblack: "#495057",
-    verylightgrey: "#e9ecef"
+    verylightgrey: "#e9ecef",
+    yellow: "#FFC107",
+    orange: "#FF5722",
+    purple: "#c5a6ff",
+    darkgreen: "#2E7D32",
 };

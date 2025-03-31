@@ -38,6 +38,10 @@ export const transactionsApi = createApi({
             query: () => `/categories`,
             providesTags: ["Categories"],
         }),
+        getTransactionGroupedByCategory: build.query<{message: string, result: any}, {type: AmountType, start: string, end: string}>({
+            query: (data) => `/transactions/grouped?type=${data.type.toLowerCase()}&from=${data.start}&to=${data.end}`,
+            providesTags: ["Transactions"],
+        })
     })
 })
 
@@ -48,4 +52,5 @@ export const {
     useGetLatestTransactionsQuery,
     useGetMonthlyTransactionsQuery,
     useGetAmountsByCategoryQuery,
+    useGetTransactionGroupedByCategoryQuery
 } = transactionsApi

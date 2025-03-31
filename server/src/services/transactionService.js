@@ -66,8 +66,12 @@ class transactionService {
             console.log(transactions);
             transactions.forEach(transaction => {
                 totalAmounts[transaction.type] += +transaction.amount;
-            })
-            res.status(200).json({message: "Transactions sended successfully", result: transactions, total: totalAmounts})
+            });
+            const formattedTransactions = transactions.map(transaction => ({
+                ...transaction,
+                category: transaction.categories.name,
+            }));
+            res.status(200).json({message: "Transactions sended successfully", result: formattedTransactions, total: totalAmounts})
         } catch(err){
             console.log(err);
             res.status(500).json({message: "Internal Server Error", result: []});
@@ -157,6 +161,49 @@ class transactionService {
         } catch(err){
             console.log(err);
             res.status(500).json({message: "Internal Server Error"});
+        }
+    }
+
+    async getTransactionByCategory(req, res){
+        try {
+            const client = new PrismaClient();
+            const type = req.query.type || "expense";
+            const startDate = new Date(req.query.from);
+            startDate.setHours(2,0,0,0)
+            const endDate = new Date(req.query.to);
+            endDate.setHours(25, 59, 59, 999);
+
+            const transactionsByCategory = await client.transactions.groupBy({
+                by: ['category_id'],
+                _sum: {
+                    amount: true
+                },
+                where: {
+                    user_id: req.userID,
+                    type: type,
+                    date: {
+                        gte: startDate,
+                        lte: endDate
+                    }
+                }
+            });
+
+            const total = transactionsByCategory.reduce((acc, group) => acc + +group._sum.amount, 0);
+            console.log(total)
+            const result = await Promise.all(transactionsByCategory.map(async (group) => {
+                const category = await client.categories.findUnique({
+                    where: { id: group.category_id }
+                });
+                return {
+                    category: category.name,
+                    totalAmount: group._sum.amount,
+                    percentage: ((group._sum.amount / total) * 100).toFixed(2),
+                };
+            }));
+
+            res.status(200).json({ message: "Transactions grouped by category successfully", result });
+        } catch(err){
+
         }
     }
 
