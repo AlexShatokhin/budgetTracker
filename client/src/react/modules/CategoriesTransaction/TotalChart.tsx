@@ -11,10 +11,22 @@ const options = {
   plugins: {
     legend: {
       position: "top" as const,
+      labels: {
+        boxWidth: 20,
+        boxHeight: 20,
+        padding: 20,
+        pointStyle: "circle",
+        usePointStyle: true,
+        font: {
+          size: 12,
+        },
+      },
     },
     tooltip: {
       callbacks: {
-        label: (tooltipItem: any) => tooltipItem.dataset.value + "$", // Отображение в процентах
+        title: (tooltipItems: any) => tooltipItems[0].dataset.label,
+        afterTitle: (tooltipItems: any) => tooltipItems[0].dataset.data[0] + "%",
+        label: (tooltipItem: any) => tooltipItem.dataset.value + "$",
       },
     },
   },
@@ -49,7 +61,12 @@ type TotalChartProps = {
 
 const TotalChart : FC<TotalChartProps> = ({data}) => {
     console.log(data);
-  return <Bar width={300} height={30} style={{width: 300, height: 30}} data={data} options={options} />;
+  return <Bar 
+    width={300} 
+    height={30} 
+    style={{width: 300, height: 30}} 
+    data={data} 
+    options={options} />;
 };
 
 export default TotalChart;
