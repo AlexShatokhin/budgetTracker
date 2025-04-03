@@ -45,7 +45,7 @@ const ReportPage = () => {
                 </div>
 
                 <div className="reports-content">
-                    <Wrapper title="Categoeies" width="calc(100% - 90px)" height="550px">
+                    <Wrapper title="Categories transactions" titleInfo="Click on the chart item to find out the transactions for that category " width="calc(100% - 90px)" height="550px">
                         <CategoriesTransaction type={selectedAmountType} timeFormat={selectedOption!.value || "month"}/>
                     </Wrapper>
                 </div>
