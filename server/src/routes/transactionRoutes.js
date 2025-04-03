@@ -7,6 +7,7 @@ routes.get("/transactions/latest", authMiddleware, transactionService.getLatestT
 routes.get("/transactions/monthly", authMiddleware, transactionService.getMonthlyTransactions)
 routes.get("/transactions/amounts", authMiddleware, transactionService.getAmountsByCategory)
 routes.get("/transactions/grouped", authMiddleware, transactionService.getTransactionByCategory)
+routes.get("/transactions/category/:categoryID", authMiddleware, transactionService.getTransactionByCategoryId)
 
 routes.post("/transactions", authMiddleware, transactionService.postTransaction);
 routes.put("/transactions/:transactionID", authMiddleware, transactionService.updateTransaction);

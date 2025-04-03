@@ -3,6 +3,6 @@ export type TransactionTableItem = {
     date: Date;
     description: string;
     amount: number;
-    category: string;
+    category?: string;
     type: string;
 }

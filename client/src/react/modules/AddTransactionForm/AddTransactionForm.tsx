@@ -6,7 +6,6 @@ import TransactionFormSelect from "./TransactionFormItems/TransactionFormSelect"
 import { AmountType } from "../../types/amountType";
 import "./add_transaction.scss"
 import { useAddNewTransactionMutation, useGetTransactionCategoriesQuery } from "../../api/modules/transactionsApi";
-import { get } from "node:http";
 
 type FormInput = {
     amount: number;

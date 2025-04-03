@@ -41,6 +41,10 @@ export const transactionsApi = createApi({
         getTransactionGroupedByCategory: build.query<{message: string, result: any}, {type: AmountType, start: string, end: string}>({
             query: (data) => `/transactions/grouped?type=${data.type.toLowerCase()}&from=${data.start}&to=${data.end}`,
             providesTags: ["Transactions"],
+        }),
+        getTransactionsByCategory: build.query<TransactionServerResponse, {id: number, start: string, end: string}>({
+            query: (data) => `/transactions/category/${data.id}?from=${data.start}&to=${data.end}`,
+            providesTags: ["Transactions"],
         })
     })
 })
@@ -52,5 +56,6 @@ export const {
     useGetLatestTransactionsQuery,
     useGetMonthlyTransactionsQuery,
     useGetAmountsByCategoryQuery,
-    useGetTransactionGroupedByCategoryQuery
+    useGetTransactionGroupedByCategoryQuery,
+    useGetTransactionsByCategoryQuery
 } = transactionsApi

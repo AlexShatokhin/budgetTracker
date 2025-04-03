@@ -4,64 +4,67 @@ import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Toolti
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
+type TotalChartProps = {
+	data: {
+		labels: string[];
+		datasets: {
+				label: string;
+				data: number[];
+				value: string;
+				backgroundColor: string;
+		}[]
+	},
 
-const options = {
-	indexAxis: "y" as const, 
-	responsive: true,
-	onClick: (event: any, elements: any) => console.log(event, elements),
-	plugins: {
-		legend: {
-			position: "top" as const,
-			labels: {
-				boxWidth: 20,
-				boxHeight: 20,
-				padding: 20,
-				pointStyle: "circle",
-				usePointStyle: true,
-				font: {
-					size: 12,
+	onClick?: (event: any, elements: { datasetIndex: number }[]) => void;
+}
+
+const TotalChart : FC<TotalChartProps> = ({data, onClick}) => {
+	const options = {
+		indexAxis: "y" as const, 
+		responsive: true,
+		onClick: onClick,
+		plugins: {
+			legend: {
+				position: "top" as const,
+				labels: {
+					boxWidth: 20,
+					boxHeight: 20,
+					padding: 20,
+					pointStyle: "circle",
+					usePointStyle: true,
+					font: {
+						size: 12,
+					},
+				},
+			},
+			tooltip: {
+				callbacks: {
+					title: (tooltipItems: any) => tooltipItems[0].dataset.label,
+					afterTitle: (tooltipItems: any) => tooltipItems[0].dataset.data[0] + "%",
+					label: (tooltipItem: any) => tooltipItem.dataset.value + "$",
 				},
 			},
 		},
-		tooltip: {
-			callbacks: {
-				title: (tooltipItems: any) => tooltipItems[0].dataset.label,
-				afterTitle: (tooltipItems: any) => tooltipItems[0].dataset.data[0] + "%",
-				label: (tooltipItem: any) => tooltipItem.dataset.value + "$",
+		scales: {
+			x: {
+				stacked: true,
+				max: 100,
+				grid: {
+					display: false,
+				},
+				ticks: {
+					callback: (value: any) => `${value}%`, // Подписи оси X в процентах
+				},
+			},
+			y: {
+				stacked: true,
 			},
 		},
-	},
-	scales: {
-		x: {
-			stacked: true,
-			max: 100,
-			grid: {
-				display: false,
-			},
-			ticks: {
-				callback: (value: any) => `${value}%`, // Подписи оси X в процентах
-			},
-		},
-		y: {
-			stacked: true,
-		},
-	},
-};
+	};
+	
 
-type TotalChartProps = {
-		data: {
-				labels: string[];
-				datasets: {
-						label: string;
-						data: number[];
-						value: string;
-						backgroundColor: string;
-				}[]
-		}
-}
 
-const TotalChart : FC<TotalChartProps> = ({data}) => {
-		console.log(data);
+	console.log(data);
 	return <Bar 
 		width={300} 
 		height={30} 

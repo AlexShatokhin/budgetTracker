@@ -195,6 +195,7 @@ class transactionService {
                     where: { id: group.category_id }
                 });
                 return {
+                    id: category.id,
                     category: category.name,
                     totalAmount: group._sum.amount,
                     percentage: ((group._sum.amount / total) * 100).toFixed(2),
@@ -204,6 +205,45 @@ class transactionService {
             res.status(200).json({ message: "Transactions grouped by category successfully", result });
         } catch(err){
 
+        }
+    }
+
+    async getTransactionByCategoryId(req, res){
+        try {
+            const client = new PrismaClient();
+            const categoryId = req.params.categoryID;
+            const startDate = new Date(req.query.from);
+            startDate.setHours(2,0,0,0)
+            const endDate = new Date(req.query.to);
+            endDate.setHours(25, 59, 59, 999);
+
+            const transactions = await client.transactions.findMany({
+                where: {
+                    user_id: req.userID,
+                    category_id: +categoryId,
+                    date: {
+                        gte: startDate,
+                        lte: endDate
+                    }
+                },
+                orderBy: {
+                    date: 'desc'
+                },
+                include: {
+                    categories: true
+                }
+            })
+
+            const formattedTransactions = transactions.map(transaction => ({
+                ...transaction,
+                category: transaction.categories.name,
+            }));
+
+            res.status(200).json({ message: `Transactions from category ${categoryId} sended successfully`, result: formattedTransactions });
+
+        } catch(err){
+            console.log(err);
+            res.status(500).json({message: "Internal Server Error", result: []});
         }
     }
 

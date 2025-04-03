@@ -12,14 +12,18 @@ import { TbCaretUpDownFilled, TbCaretDownFilled, TbCaretUpFilled } from "react-i
 
 import { TableNode } from '@table-library/react-table-library/types/table';
 import { Column } from '@table-library/react-table-library/types/compact';
+import { TransactionTableItem } from '../../modules/Transactions/TrasactionTableItemType';
 
 type ComposedTableProps = {
 	columns: Column<TableNode>[];
 	sortFns: {[key: string]: (array: any[]) => any[]};
-	data: any;
+	data: TransactionTableItem[];
+	isSelect?: boolean;
+	columnsStyle?: string;
+	itemsPerPage?: number;
 }
 
-const ComposedTable : FC<ComposedTableProps> = ({columns, sortFns, data}) => {	
+const ComposedTable : FC<ComposedTableProps> = ({columns, sortFns, data, columnsStyle = "40px minmax(0px, 1fr) minmax(0px, 2fr) minmax(0px, 1fr) minmax(0px, 1fr)", isSelect = true, itemsPerPage = 10}) => {	
 	const tableData = {nodes: data}
 	const select = useRowSelect(tableData);
 	const theme = useTheme([{
@@ -35,7 +39,7 @@ const ComposedTable : FC<ComposedTableProps> = ({columns, sortFns, data}) => {
 		Cell: ``,
 		HeaderCell: ``,
 		Table: `
-			grid-template-columns: 40px minmax(0px, 1fr) minmax(0px, 2fr) minmax(0px, 1fr) minmax(0px, 1fr);
+			grid-template-columns: ${columnsStyle};
 		`
 	}]);
 	const onSortChange = (action : any, state : any) => console.log(action, state) 
@@ -58,7 +62,7 @@ const ComposedTable : FC<ComposedTableProps> = ({columns, sortFns, data}) => {
 	const pagination= usePagination(tableData, {
 		state: {
 			page: 0,
-			size: 10
+			size: itemsPerPage
 		}
 	});
 
@@ -69,7 +73,7 @@ const ComposedTable : FC<ComposedTableProps> = ({columns, sortFns, data}) => {
 				columns={columns}
 				data={tableData} 
 				pagination={pagination}
-				select={select}
+				select={isSelect ? select : undefined}
 				sort={sort}
 			/>
 
