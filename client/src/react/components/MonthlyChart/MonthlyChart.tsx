@@ -3,6 +3,7 @@ import { Bar } from "react-chartjs-2";
 import { Chart as ChartJS, BarElement, Tooltip, Legend, CategoryScale, LinearScale } from 'chart.js';
 import { colors } from "../../../constants/colors";
 import { useGetMonthlyTransactionsQuery } from "../../api/modules/transactionsApi";
+import Spinner from "../../UI/Spinner/Spinner";
 
 ChartJS.register(BarElement, Tooltip, Legend, CategoryScale, LinearScale);
 
@@ -12,7 +13,7 @@ type MonthlyChartProps = {
 }
 
 const MonthlyChart : FC<MonthlyChartProps> = ({width, height}) => {
-    const {data} = useGetMonthlyTransactionsQuery();
+    const {data, isFetching, isError} = useGetMonthlyTransactionsQuery();
     const chartData = {
         labels: data?.result.map((item) => item.month) || [],
         datasets: [
@@ -69,8 +70,12 @@ const MonthlyChart : FC<MonthlyChartProps> = ({width, height}) => {
     };
 
     return (
-        <div style={{width, height}} className="finance-chart">
-            <Bar width={width} height={height} data={chartData} options={chartOptions} />
+        <div style={{width, height,position: "relative"}} className="finance-chart">
+            {isFetching && <Spinner />}
+            {isError && <div className="error-message">Something went wrong</div>}
+            {!isFetching && data?.result.length === 0 && <div className="empty-data">No data available</div>}
+            {!isFetching  && data && data?.result.length > 0 &&  <Bar width={width} height={height} data={chartData} options={chartOptions} />}
+            
         </div>
     );
 }
