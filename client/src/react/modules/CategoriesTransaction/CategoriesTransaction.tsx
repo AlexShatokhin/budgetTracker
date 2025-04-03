@@ -33,6 +33,19 @@ type CategoriesTransactionProps = {
     timeFormat: string
 }
 
+type TransactionsItemRaw = {
+    category: string,
+    totalAmount: string,
+    percentage: string
+}
+
+type TransactionsItem = {
+    label: string,
+    data: [number],
+    value: string,
+    backgroundColor: string
+}
+
 const CategoriesTransaction : FC<CategoriesTransactionProps> = ({type, timeFormat}) => {
     console.log(type, timeFormat);
     const {data} = useGetTransactionGroupedByCategoryQuery({type, ...getTimeInterval(timeFormat)});
@@ -41,14 +54,14 @@ const CategoriesTransaction : FC<CategoriesTransactionProps> = ({type, timeForma
     
     const chartFormat = {
         labels: [""],
-        datasets: data?.result.map((item : {category: string, totalAmount: string, percentage: string}, index : number) => {
+        datasets: data?.result.map((item : TransactionsItemRaw, index : number) => {
             return {
                 label: item.category,
                 data: [item.percentage], 
                 value: item.totalAmount,
                 backgroundColor: labelColors[index % labelColors.length],
             }
-        }) || []
+        }).sort((a : TransactionsItem, b : TransactionsItem) => b.data[0] - a.data[0]) || []
     }
     return (
         <div className="categories-content">

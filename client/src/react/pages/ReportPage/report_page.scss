@@ -1,0 +1,33 @@
+@import "../../../constants/_colors.scss";
+
+.report-config{
+    position: absolute;
+    right: 20px;
+    top: 40px;
+    display: flex;
+    width: 500px;
+    justify-content: space-between;
+    z-index: 10;
+    .select{
+        width: 200px;
+    }
+}
+
+.report-switch{
+    display: flex;
+    align-items: center;
+    span{
+        margin: 10px;
+        color: $grey;
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+    .choosen{
+        font-weight: 600;
+        color: $black;
+    }
+}
+
+.reports-content{
+    margin-top: 50px;
+}
