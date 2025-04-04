@@ -14,11 +14,11 @@ type TotalChartProps = {
 				backgroundColor: string;
 		}[]
 	},
-
+	isLoading?: boolean;
 	onClick?: (event: any, elements: { datasetIndex: number }[]) => void;
 }
 
-const TotalChart : FC<TotalChartProps> = ({data, onClick}) => {
+const TotalChart : FC<TotalChartProps> = ({data, onClick, isLoading}) => {
 	const options = {
 		indexAxis: "y" as const, 
 		responsive: true,
@@ -62,13 +62,10 @@ const TotalChart : FC<TotalChartProps> = ({data, onClick}) => {
 		},
 	};
 	
-
-
-	console.log(data);
 	return <Bar 
 		width={300} 
 		height={30} 
-		style={{width: 300, height: 30}} 
+		style={{width: 300, height: 30, opacity: isLoading ? 0.7 : 1, transition: "opacity 0.2s"}} 
 		data={data} 
 		options={options} />;
 };

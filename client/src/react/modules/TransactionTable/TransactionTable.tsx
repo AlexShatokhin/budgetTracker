@@ -16,7 +16,7 @@ const TransactionTable : FC<TransactionTableProps> = ({data, disabled = false}) 
     const sortFunctions = {
         DATE: (array: TransactionTableItem[]) => array.sort((a, b) => +a.date - +b.date),
         AMOUNT: (array: TransactionTableItem[]) => array.sort((a, b) => a.amount - b.amount),
-        CATEGORY: (array: TransactionTableItem[]) => array.sort((a, b) => a.category.localeCompare(b.category)),
+        CATEGORY: (array: TransactionTableItem[]) => array.sort((a, b) => (a.category ?? "").localeCompare(b.category ?? "")),
     }
     const COLUMNS  = [
         { 

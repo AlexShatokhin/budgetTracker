@@ -11,6 +11,7 @@ import { TableNode } from "@table-library/react-table-library";
 import { TransactionServerResponse } from "../../types/TransactionServerResponse";
 import { TransactionTableItem } from "../Transactions/TrasactionTableItemType";
 import "./categories_transactions.scss"
+import useQueryState from "../../hooks/useQueryState";
 
 const labelColors = [colors.lightblue, colors.red, colors.purple, colors.green, colors.yellow, colors.darkgreen, colors.orange]
 
@@ -58,9 +59,10 @@ type TransactionsItem = {
 const CategoriesTransaction : FC<CategoriesTransactionProps> = ({type, timeFormat}) => {
     console.log(type, timeFormat);
     const [categoryID, setCategoryID] = useState<number>(-1);
-    const {data} = useGetTransactionGroupedByCategoryQuery({type, ...getTimeInterval(timeFormat)});
+    const {data, isFetching : chartFetching} = useGetTransactionGroupedByCategoryQuery({type, ...getTimeInterval(timeFormat)});
     const categories = useGetTransactionCategoriesQuery();
-    const {data: transactionsByCategory, isFetching} = useGetTransactionsByCategoryQuery({id: categoryID, ...getTimeInterval(timeFormat)}, {skip: categoryID === -1});
+    const {data: transactionsByCategory, isFetching, isError} = useGetTransactionsByCategoryQuery({id: categoryID, ...getTimeInterval(timeFormat)}, {skip: categoryID === -1});
+    const Component = useQueryState(isFetching, isError, transactionsByCategory, );
     console.log(transactionsByCategory);
     
 
@@ -121,10 +123,10 @@ const CategoriesTransaction : FC<CategoriesTransactionProps> = ({type, timeForma
 
     return (
         <div className="categories-content">
-            <TotalChart onClick={getCategoryIdByClick} data={chartFormat}/>
+            <TotalChart isLoading = {chartFetching} onClick={getCategoryIdByClick} data={chartFormat}/>
             <div className="categories-content__list">
                 {
-                    transactionsByCategory &&   
+                    Component || transactionsByCategory &&   
                         <>
                             <div className="categories-content__title">{transactionsByCategory.result[0].category}</div>
                             <ComposedTable 

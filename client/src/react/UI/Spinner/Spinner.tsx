@@ -12,7 +12,7 @@ type SpinnerProps = {
 
 const Spinner : FC<SpinnerProps> = ({size = 30, color = colors.blue, speedMultiplier = 0.7}) => {
     return (
-        <div className="loading-wrapper">
+        <div className="full-wrapper">
             <BeatLoader 
                 size={size}
                 color={color}
