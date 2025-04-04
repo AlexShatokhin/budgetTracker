@@ -1,6 +1,6 @@
 import {FC, useState} from "react";
 import { colors } from "../../../constants/colors";
-import { useGetTransactionCategoriesQuery, useGetTransactionGroupedByCategoryQuery, useGetTransactionsByCategoryQuery } from "../../api/modules/transactionsApi";
+import { useGetTransactionGroupedByCategoryQuery, useGetTransactionsByCategoryQuery } from "../../api/modules/transactionsApi";
 import { AmountType } from "../../types/amountType";
 import TotalChart from "./TotalChart";
 import ComposedTable from "../../components/Table/ComposedTable";
@@ -12,30 +12,9 @@ import { TransactionServerResponse } from "../../types/TransactionServerResponse
 import { TransactionTableItem } from "../Transactions/TrasactionTableItemType";
 import "./categories_transactions.scss"
 import useQueryState from "../../hooks/useQueryState";
+import getTimeInterval from "../../helpers/getTimeInterval";
 
 const labelColors = [colors.lightblue, colors.red, colors.purple, colors.green, colors.yellow, colors.darkgreen, colors.orange]
-
-const getTimeInterval = (value: string) => {
-    
-    let result = {
-        start: new Date(),
-        end: new Date()
-    }
-
-    if(value === 'week') {
-        result.start = new Date(result.start.setDate(result.start.getDate() - 7));
-    }
-
-    if(value === 'month') {
-        result.start = new Date(result.start.setMonth(result.start.getMonth() - 1));
-    }
-
-    if(value === 'year') {
-        result.start = new Date(result.start.setFullYear(result.start.getFullYear() - 1));
-    }
-
-    return {start: result.start.toDateString(), end: result.end.toDateString()};
-}
 
 type CategoriesTransactionProps = {
     type: AmountType,
@@ -57,15 +36,12 @@ type TransactionsItem = {
 }
 
 const CategoriesTransaction : FC<CategoriesTransactionProps> = ({type, timeFormat}) => {
-    console.log(type, timeFormat);
     const [categoryID, setCategoryID] = useState<number>(-1);
     const {data, isFetching : chartFetching} = useGetTransactionGroupedByCategoryQuery({type, ...getTimeInterval(timeFormat)});
-    const categories = useGetTransactionCategoriesQuery();
     const {data: transactionsByCategory, isFetching, isError} = useGetTransactionsByCategoryQuery({id: categoryID, ...getTimeInterval(timeFormat)}, {skip: categoryID === -1});
     const Component = useQueryState(isFetching, isError, transactionsByCategory, );
     console.log(transactionsByCategory);
     
-
     const chartFormat = {
         labels: [""],
         datasets: data?.result.map((item : TransactionsItemRaw, index : number) => {

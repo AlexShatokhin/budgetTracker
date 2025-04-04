@@ -1,4 +1,3 @@
-import FinanceChart from "../../components/FinanceChart/FinanceChat";
 import Layout from "../../components/Layout/Layout"
 import MonthlyChart from "../../components/MonthlyChart/MonthlyChart";
 import { useTypedSelector } from "../../hooks/useRedux";

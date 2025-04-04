@@ -79,7 +79,6 @@ const AddTransactionForm : FC<AddTransactionFormProps> = ({onClose}) => {
                     id="type" 
                     label="Type" 
                     {...register("type", {required: true})}/>
-                {/* <TransactionFormInput id="category" label="Category" {...register("category", {required: true})}/> */}
                 <TransactionFormSelect 
                     defaultValue={"0"}
                     values={selectData}
