@@ -1,4 +1,4 @@
-@import "../../../constants/_colors";
+@import "../../../constants/__theme";
 
 .layout{
     display: flex;
@@ -9,5 +9,7 @@
     height: 100vh;
     overflow-y: scroll;
     width: 100%;
-    background-color: $lightgrey;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s, color 0.3s;
 }

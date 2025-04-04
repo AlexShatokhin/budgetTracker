@@ -1,4 +1,5 @@
 @import "../../../constants/_colors";
+@import "../../../constants/__theme";
 
 .transactions-compact{
     position: relative;
@@ -12,7 +13,7 @@
         color: $grey;
         transition: .3s all;
         &:hover{
-            color: $black;
+            color: var(--text-color);
         }
         svg{
             margin-left: 5px;

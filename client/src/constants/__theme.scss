@@ -1,0 +1,23 @@
+@import "./_colors";
+
+@mixin light-theme {
+    --bg-color: #{$lightgrey};
+    --text-color: #{$black};
+    --wrapper-bg-color: #{$white};
+    --wrapper-text-color: #{$black};
+}
+
+@mixin dark-theme {
+    --bg-color: #{$mediumblack};
+    --text-color: #{$lightgrey};
+    --wrapper-bg-color: #{$lightblack};
+    --wrapper-text-color: #{$lightgrey};
+}
+
+:root {
+    @include light-theme;
+}
+  
+.dark-theme {
+    @include dark-theme;
+}
