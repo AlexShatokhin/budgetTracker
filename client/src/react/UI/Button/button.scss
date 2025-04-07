@@ -1,8 +1,9 @@
 @import "../../../constants/__colors";
+@import "../../../constants/__theme";
 
 .button {
-  background-color: $black;
-  color: $white;
+  background-color: var(--wrapper-bg-color);
+  color: var(--wrapper-text-color);
   padding: 10px 20px;
   border: none;
   border-radius: 10px;
@@ -13,7 +14,7 @@
 }
 
 .button:disabled{
-  background-color: $grey;
-  color: $white;
+  background-color: var(--wrapper-bg-color);
+  color: var(--wrapper-text-color);
   cursor: not-allowed;
 }

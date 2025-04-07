@@ -5,6 +5,7 @@
     --text-color: #{$black};
     --wrapper-bg-color: #{$white};
     --wrapper-text-color: #{$black};
+    --theme-blue: #{$blue};
 }
 
 @mixin dark-theme {
@@ -12,10 +13,11 @@
     --text-color: #{$lightgrey};
     --wrapper-bg-color: #{$lightblack};
     --wrapper-text-color: #{$lightgrey};
+    --theme-blue: #{$lightblue};
 }
 
 :root {
-    @include light-theme;
+    @include dark-theme;
 }
   
 .dark-theme {

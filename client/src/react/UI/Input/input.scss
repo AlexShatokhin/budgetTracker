@@ -1,4 +1,5 @@
 @import "../../../constants/__colors.scss";
+@import "../../../constants/__theme.scss";
 
 .input-wrapper {
     position: relative;
@@ -6,19 +7,19 @@
     .input {
         border: 2px solid $blue;
         border-color: transparent;
-        background-color: $lightgrey;
+        background-color: var(--wrapper-bg-color); /*$lightgrey*/
         padding: 10px;
         padding-right: 35px;
         font-size: 16px;
         border-radius: 10px;
-        color: $black;
+        color: var(--text-color);
         font-weight: 400;
         outline: none;
         overflow: hidden;
     }
 
     input:focus {
-        border-color: $blue;
+        border-color: var(--theme-blue);
     }
 
     .toggle-password{

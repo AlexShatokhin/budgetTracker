@@ -1,17 +1,21 @@
 @import "../../../constants/_colors";
+@import "../../../constants/__theme";
 
 table {
-    border: 2px solid #00000028;
+    border: 2px solid rgba($color: $black, $alpha: 0.3);
     border-radius: 10px;
     padding: 15px;
     margin-bottom: 15px;
+    background-color: var(--wrapper-bg-color);
 }
 
 thead{
+
     td{
         opacity: 0.5;
         font-weight: 600;
         div{
+            background-color: var(--wrapper-bg-color);
             padding-bottom: 10px;
         }
     }
@@ -31,6 +35,8 @@ tbody{
         border-top: 2px solid rgba($color: $black, $alpha: 0.1);
         div {
             padding: 15px 0;
+            background-color: var(--wrapper-bg-color);
+            color: var(--wrapper-text-color);
         }
     }
     .income{
@@ -57,7 +63,7 @@ tbody{
         height: 100%;
         display: flex;
         align-items: center;
-        color:  $black;
+        color: var(--text-color);
     }
     &__buttons{
         display: flex;
