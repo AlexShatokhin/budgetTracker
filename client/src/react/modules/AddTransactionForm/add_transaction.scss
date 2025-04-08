@@ -1,4 +1,4 @@
-@import "../../../constants/_colors";
+@import "../../../constants/_theme";
 
 .transaction-form{
     &__wrapper{
@@ -22,9 +22,9 @@
     }
     &__cancel{
         background-color: transparent;
-        color: $black;
+        color: var(--text-color);
         font-weight: 600;
-        border: 2px solid $black;
+        border: 2px solid var(--text-color);
     }
 
     &__errors{

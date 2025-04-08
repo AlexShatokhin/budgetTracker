@@ -36,8 +36,12 @@ const ComposedTable : FC<ComposedTableProps> = ({columns, sortFns, data, columns
 				background-color: rgba(0,0,0, 0.1);
 			}
 		`,
-		Cell: ``,
-		HeaderCell: ``,
+		Cell: `
+		background-color: var(--bg-color);
+		`,
+		HeaderCell: `
+			background-color: var(--bg-color);
+		`,
 		Table: `
 			grid-template-columns: ${columnsStyle};
 		`
@@ -84,10 +88,10 @@ const ComposedTable : FC<ComposedTableProps> = ({columns, sortFns, data, columns
 
 				<span className="table-pagination__buttons">
 					<button disabled = {pagination.state.page === 0} className="table-pagination__buttons-item" onClick={() => pagination.fns.onSetPage(pagination.state.page - 1)}>
-						<FaChevronLeft size={20} color={colors.black}/>
+						<FaChevronLeft size={20} color={"var(--text-color)"}/>
 					</button>
 					<button disabled = {pagination.state.page+1 === pagination.state.getTotalPages(tableData.nodes)} className="table-pagination__buttons-item" onClick={() => pagination.fns.onSetPage(pagination.state.page + 1)}>
-						<FaChevronRight size={20} color={colors.black} />
+						<FaChevronRight size={20} color={"var(--text-color)"} />
 					</button>
 				</span>
 			</div>

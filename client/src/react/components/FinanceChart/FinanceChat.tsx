@@ -33,6 +33,8 @@ const FinanceChart : FC<FinanceChartProps> = ({width, height, labels, data}) => 
     };
 
     const chartOptions: any = {
+        borderColor: "rgba(255, 255, 255, 0.1)",
+        borderWidth: 3,
         layout: {
             padding: {
                 top: 50,
@@ -63,7 +65,7 @@ const FinanceChart : FC<FinanceChartProps> = ({width, height, labels, data}) => 
                     const label = chartData.labels[context.dataIndex];
                     return `${label}\n${percentage}%`;
                 },
-                color: '#000',
+                color: colors.lightgrey,
                 font: {
                     weight: '400',
                     size: 12

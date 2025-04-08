@@ -44,6 +44,13 @@ const Transactions = () => {
                     <Select 
                         onChange={(option) => setSelectedOption(option)}
                         className="select"
+                        styles={{
+                            control: (baseStyles) => ({
+                              ...baseStyles,
+                              backgroundColor: "var(--wrapper-bg-color)",
+                              color: "var(--text-color)",
+                            }),
+                          }}
                         defaultValue={selectedOption}
                         options={options}/>
                 </div>

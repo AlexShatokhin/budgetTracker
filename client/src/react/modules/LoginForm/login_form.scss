@@ -1,4 +1,4 @@
-@import "../../../constants/_colors";
+@import "../../../constants/_theme";
 
 .form-wrapper{
     width: 50vw;
@@ -48,7 +48,7 @@
             bottom: 20px;
             a{
                 text-decoration: none;
-                color: $black;
+                color: var(--text-color);
                 font-weight: 700;
             }
         }

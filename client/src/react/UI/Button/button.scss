@@ -2,8 +2,8 @@
 @import "../../../constants/__theme";
 
 .button {
-  background-color: var(--wrapper-bg-color);
-  color: var(--wrapper-text-color);
+  background-color: var(--wrapper-text-color);
+  color: var(--wrapper-bg-color);
   padding: 10px 20px;
   border: none;
   border-radius: 10px;

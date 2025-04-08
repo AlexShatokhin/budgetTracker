@@ -1,4 +1,4 @@
-@import "../../../constants/_colors";
+@import "../../../constants/__theme";
 
 .error{
     display: flex;
@@ -21,8 +21,8 @@
             margin-bottom: 40px;
         } 
         a{
-            color: $white;
-            background-color: $black;
+            color: var(--bg-color);
+            background-color: var(--wrapper-text-color);
             text-decoration: none;
             padding: 10px 20px;
             border-radius: 20px;

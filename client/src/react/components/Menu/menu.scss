@@ -1,14 +1,16 @@
 @import "../../../constants/__colors.scss";
+@import "../../../constants/__theme.scss";
 
 .menu{
     width: 250px;
     height: calc(100vh - 40px);
     border: none;
-    border-right: 1px solid #e0e0e0;
+    border-right: 1px solid var(--bg-color);
     padding: 20px 30px;
     display: flex;
     justify-content: space-between;
     flex-direction: column;
+    background-color: var(--bg-color);
     &__list{
         margin: 0;
         padding: 0;
@@ -18,7 +20,7 @@
             a {
                 width: calc(100% - 30px);
                 display: block;
-                color: $black;
+                color: var(--text-color);
                 text-decoration: none;
                 padding: 15px 20px;
                 border-radius: 10px;

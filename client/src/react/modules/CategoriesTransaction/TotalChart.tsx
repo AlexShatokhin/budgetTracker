@@ -1,6 +1,7 @@
 import {FC} from "react";
 import { Bar } from "react-chartjs-2";
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from "chart.js";
+import { colors } from "../../../constants/colors";
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
@@ -32,6 +33,8 @@ const TotalChart : FC<TotalChartProps> = ({data, onClick, isLoading}) => {
 					padding: 20,
 					pointStyle: "circle",
 					usePointStyle: true,
+					color: colors.lightgrey,
+
 					font: {
 						size: 12,
 					},
@@ -54,6 +57,7 @@ const TotalChart : FC<TotalChartProps> = ({data, onClick, isLoading}) => {
 				},
 				ticks: {
 					callback: (value: any) => `${value}%`, // Подписи оси X в процентах
+					color: colors.lightgrey
 				},
 			},
 			y: {

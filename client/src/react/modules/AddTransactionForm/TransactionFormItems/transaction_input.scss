@@ -1,4 +1,4 @@
-@import "../../../../constants/_colors";
+@import "../../../../constants/_theme";
 
 .transaction-item-wrapper{
     margin: 0 10px 10px 0;
@@ -6,7 +6,7 @@
 
 label{
     font-size: 14px;
-    color: $black;
+    color: var(--text-color);
     font-weight: 400;
     margin-bottom: 10px;
 }
@@ -14,11 +14,12 @@ label{
 .transaction-input{
     width: calc(100% - 20px);
     height: 25px;
-    border: 2px solid $black;
+    border: 2px solid var(--text-color);
     border-radius: 5px;
     padding: 5px 10px;
     font-size: 17px;
-    color: $black;
+    color: var(--text-color);
+    background-color: var(--wrapper-bg-color);
     font-family: sans-serif;
     outline: none;
 }

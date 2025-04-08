@@ -50,7 +50,7 @@ const MonthlyChart : FC<MonthlyChartProps> = ({width, height}) => {
                         const value = context.raw || 0;
                         return `${label}: $${value}`;
                     }
-                }
+                },
             },
             datalabels: {
                 display: false
@@ -61,12 +61,33 @@ const MonthlyChart : FC<MonthlyChartProps> = ({width, height}) => {
                 title: {
                     display: false,
                     text: 'Month'
+                },
+                ticks: {
+                    color: colors.white,
+                    font: {
+                        size: 14,
+                        weight: 'bold'
+                    },
+                    grid: {
+                        color: colors.darkgrey,
+                        lineWidth: 1,
+                    },
                 }
             },
             y: {
                 title: {
                     display: false,
                     text: 'Amount ($)'
+                },
+                ticks: {
+                    color: colors.white,
+                    font: {
+                        size: 12,
+                    },
+                },
+                grid: {
+                    color: colors.darkgrey,
+                    lineWidth: 1,
                 },
                 beginAtZero: true
             }
