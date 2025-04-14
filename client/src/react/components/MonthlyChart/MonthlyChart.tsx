@@ -63,13 +63,13 @@ const MonthlyChart : FC<MonthlyChartProps> = ({width, height}) => {
                     text: 'Month'
                 },
                 ticks: {
-                    color: colors.white,
+                    color: colors.black,
                     font: {
                         size: 14,
                         weight: 'bold'
                     },
                     grid: {
-                        color: colors.darkgrey,
+                        color: colors.lightgrey,
                         lineWidth: 1,
                     },
                 }
@@ -80,13 +80,13 @@ const MonthlyChart : FC<MonthlyChartProps> = ({width, height}) => {
                     text: 'Amount ($)'
                 },
                 ticks: {
-                    color: colors.white,
+                    color: colors.black,
                     font: {
                         size: 12,
                     },
                 },
                 grid: {
-                    color: colors.darkgrey,
+                    color: colors.lightgrey,
                     lineWidth: 1,
                 },
                 beginAtZero: true

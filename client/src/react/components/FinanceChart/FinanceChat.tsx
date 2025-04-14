@@ -65,7 +65,7 @@ const FinanceChart : FC<FinanceChartProps> = ({width, height, labels, data}) => 
                     const label = chartData.labels[context.dataIndex];
                     return `${label}\n${percentage}%`;
                 },
-                color: colors.lightgrey,
+                color: colors.black,
                 font: {
                     weight: '400',
                     size: 12

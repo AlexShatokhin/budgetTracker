@@ -10,14 +10,15 @@ class authService {
         };
     }
 
-    auth = this.asyncHandler(async (_req, res) => {
+    auth = this.asyncHandler(async (req, res) => {
+        const {email, password} = req.body;
         const hashPassword = await bcrypt.hash(password, 10);
         const user = await this.prisma.users.findUnique({
             where: {email}
         });
         if(user) return res.status(400).json({message: 'User already exists'});
 
-        await prisma.users.create({
+        await this.prisma.users.create({
             data: {
                 email,
                 password: hashPassword

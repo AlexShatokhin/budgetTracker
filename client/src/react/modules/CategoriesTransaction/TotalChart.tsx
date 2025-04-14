@@ -33,7 +33,7 @@ const TotalChart : FC<TotalChartProps> = ({data, onClick, isLoading}) => {
 					padding: 20,
 					pointStyle: "circle",
 					usePointStyle: true,
-					color: colors.lightgrey,
+					color: colors.black,
 
 					font: {
 						size: 12,
