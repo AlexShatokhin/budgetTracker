@@ -1,0 +1,26 @@
+@import "../../../constants/_colors"; 
+@import "../../../constants/_theme"; 
+
+.settings-item{
+    width: calc(100% - 70px);
+    min-height: 200px;
+    padding: 20px 30px;
+    display: flex;
+    border-bottom: 1px solid rgba($color: $grey, $alpha: 0.2);
+    &__text{
+        width: 550px;
+        .settings-title{
+            font-size: 20px;
+            font-weight: 500;
+            margin-bottom: 0px;
+            color: var(--text-color);
+        }
+
+        .settings-subtitle{
+            font-size: 16px;
+            color: $grey;
+            font-weight: 400;
+            margin-top: 0;
+        }
+    }
+}

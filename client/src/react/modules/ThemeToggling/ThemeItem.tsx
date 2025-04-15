@@ -1,0 +1,26 @@
+import {FC} from "react"
+import lightTheme from "../../../assets/light_theme.svg";
+import darkTheme from "../../../assets/dark_theme.svg";
+
+import "./theme_item.scss"
+
+type ThemeItemProps = {
+    theme: "light" | "dark";
+}
+
+const ThemeItem: FC<ThemeItemProps> = ({theme}) => {
+    const isLightTheme = theme === "light";
+    return (
+        <div className="theme-item">
+            <div className="theme-item__image">
+                <img src={isLightTheme ? lightTheme : darkTheme} alt={isLightTheme ? "light theme" : "dark theme" } />
+            </div>
+            <div className="theme-item__label">
+                <input type="radio" name="theme-toggler" id={isLightTheme ? "light-theme" : "dark-theme" } />
+                <label htmlFor={isLightTheme ? "light-theme" : "dark-theme" }>{isLightTheme ? "Light mode" : "Dark mode"}</label>
+            </div>
+        </div>
+    )
+}
+
+export default ThemeItem;
