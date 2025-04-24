@@ -4,6 +4,7 @@ import { Chart as ChartJS, BarElement, Tooltip, Legend, CategoryScale, LinearSca
 import { colors } from "../../../constants/colors";
 import { useGetMonthlyTransactionsQuery } from "../../api/modules/transactionsApi";
 import useQueryState from "../../hooks/useQueryState";
+import useStorage from "../../hooks/useStorage";
 
 ChartJS.register(BarElement, Tooltip, Legend, CategoryScale, LinearScale);
 
@@ -14,10 +15,16 @@ type MonthlyChartProps = {
 
 const MonthlyChart : FC<MonthlyChartProps> = ({width, height}) => {
     const {data, isFetching, isError} = useGetMonthlyTransactionsQuery();
+
     const Component = useQueryState(isFetching, isError, data, {
         errorWidth: 250,
         errorHeight: 250,
     });
+
+    const currency = useStorage().getItem("currency") || "USD";
+    const currencySymbol = currency === "USD" ? "$" : currency === "EUR" ? "€" : "₽";
+
+
     const chartData = {
         labels: data?.result.map((item) => item.month) || [],
         datasets: [
@@ -48,7 +55,7 @@ const MonthlyChart : FC<MonthlyChartProps> = ({width, height}) => {
                     label: function (context: any) {
                         const label = context.dataset.label || '';
                         const value = context.raw || 0;
-                        return `${label}: $${value}`;
+                        return `${label}: ${currencySymbol}${value}`;
                     }
                 },
             },
@@ -77,7 +84,7 @@ const MonthlyChart : FC<MonthlyChartProps> = ({width, height}) => {
             y: {
                 title: {
                     display: false,
-                    text: 'Amount ($)'
+                    text: `Amount (${currencySymbol})`
                 },
                 ticks: {
                     color: colors.black,

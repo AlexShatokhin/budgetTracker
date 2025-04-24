@@ -6,6 +6,7 @@ import { FiTable } from "react-icons/fi";
 import { Column } from "@table-library/react-table-library/types/compact";
 import { TableNode } from "@table-library/react-table-library";
 import { TransactionTableItem } from '../Transactions/TrasactionTableItemType';
+import useStorage from '../../hooks/useStorage';
 
 type TransactionTableProps = {
     data: TransactionTableItem[],
@@ -13,6 +14,9 @@ type TransactionTableProps = {
 }
 
 const TransactionTable : FC<TransactionTableProps> = ({data, disabled = false}) => {
+    const currency = useStorage().getItem("currency") || "USD";
+    const currencySymbol = currency === "USD" ? "$" : currency === "EUR" ? "€" : "₽";
+
     const sortFunctions = {
         DATE: (array: TransactionTableItem[]) => array.sort((a, b) => +a.date - +b.date),
         AMOUNT: (array: TransactionTableItem[]) => array.sort((a, b) => a.amount - b.amount),
@@ -36,7 +40,7 @@ const TransactionTable : FC<TransactionTableProps> = ({data, disabled = false}) 
           renderCell: (item : any) => item.description,
         },
         { label: <span><FaMoneyBillWave /> Amount</span>, 
-            renderCell: (item : any) => (item.type === "expense" ? " - " : "") + item.amount + " $",
+            renderCell: (item : any) => (item.type === "expense" ? " - " : "") + item.amount + " " + currencySymbol,
             sort: {sortKey: "AMOUNT"}
         },
         {

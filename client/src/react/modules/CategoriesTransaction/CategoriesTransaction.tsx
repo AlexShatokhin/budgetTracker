@@ -40,8 +40,10 @@ const CategoriesTransaction : FC<CategoriesTransactionProps> = ({type, timeForma
     const {data, isFetching : chartFetching} = useGetTransactionGroupedByCategoryQuery({type, ...getTimeInterval(timeFormat)});
     const {data: transactionsByCategory, isFetching, isError} = useGetTransactionsByCategoryQuery({id: categoryID, ...getTimeInterval(timeFormat)}, {skip: categoryID === -1});
     const Component = useQueryState(isFetching, isError, transactionsByCategory, );
-    console.log(transactionsByCategory);
-    
+    const currency = localStorage.getItem("currency") || "USD";
+    console.log(currency)
+    const currencySymbol = currency === "USD" ? "$" : currency === "EUR" ? "€" : "₽";
+
     const chartFormat = {
         labels: [""],
         datasets: data?.result.map((item : TransactionsItemRaw, index : number) => {
@@ -80,7 +82,7 @@ const CategoriesTransaction : FC<CategoriesTransactionProps> = ({type, timeForma
           renderCell: (item : any) => item.description,
         },
         { label: <span><FaMoneyBillWave /> Amount</span>, 
-            renderCell: (item : any) => (item.type === "expense" ? " - " : "") + item.amount + " $",
+            renderCell: (item : any) => (item.type === "expense" ? " - " : "") + item.amount + " " + currencySymbol,
             sort: {sortKey: "AMOUNT"}
         },
       ];

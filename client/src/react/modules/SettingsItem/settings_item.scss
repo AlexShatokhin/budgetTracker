@@ -3,7 +3,7 @@
 
 .settings-item{
     width: calc(100% - 70px);
-    min-height: 200px;
+    min-height: 80px;
     padding: 20px 30px;
     display: flex;
     border-bottom: 1px solid rgba($color: $grey, $alpha: 0.2);
@@ -22,5 +22,12 @@
             font-weight: 400;
             margin-top: 0;
         }
+    }
+    &__content{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        min-height: 80px;
     }
 }

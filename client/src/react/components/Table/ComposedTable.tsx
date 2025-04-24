@@ -3,7 +3,6 @@ import { CompactTable } from "@table-library/react-table-library/compact";
 import {usePagination} from '@table-library/react-table-library/pagination';
 import { useRowSelect } from "@table-library/react-table-library/select";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
-import { colors } from "../../../constants/colors";
 
 import { useTheme } from "@table-library/react-table-library/theme";
 import { useSort, SortToggleType } from "@table-library/react-table-library/sort";
