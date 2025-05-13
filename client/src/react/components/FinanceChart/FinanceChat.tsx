@@ -3,6 +3,7 @@ import { Pie } from "react-chartjs-2";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { colors } from "../../../constants/colors";
+import useStorage from "../../hooks/useStorage";
 
 // Регистрация компонентов
 ChartJS.register(ArcElement, Tooltip, Legend, ChartDataLabels);
@@ -15,6 +16,8 @@ type FinanceChartProps = {
 }
 
 const FinanceChart : FC<FinanceChartProps> = ({width, height, labels, data}) => {
+    const {getItem} = useStorage();
+    const theme = getItem("theme") || "light";
     const chartData = {
         labels,
         datasets: [
@@ -65,7 +68,7 @@ const FinanceChart : FC<FinanceChartProps> = ({width, height, labels, data}) => 
                     const label = chartData.labels[context.dataIndex];
                     return `${label}\n${percentage}%`;
                 },
-                color: colors.black,
+                color: theme === "light" ? colors.black : colors.white,
                 font: {
                     weight: '400',
                     size: 12

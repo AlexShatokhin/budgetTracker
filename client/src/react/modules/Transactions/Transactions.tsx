@@ -8,6 +8,7 @@ import { TransactionServerType } from "../../types/TransactionType";
 import { useGetTransactionsQuery } from "../../api/modules/transactionsApi";
 import { TransactionTableItem } from "./TrasactionTableItemType";
 import getTimeInterval from "../../helpers/getTimeInterval";
+import { colors } from "../../../constants/colors";
 
 const options = [
     { value: 'week', label: 'Last Week' },
@@ -49,6 +50,18 @@ const Transactions = () => {
                               ...baseStyles,
                               backgroundColor: "var(--wrapper-bg-color)",
                               color: "var(--text-color)",
+                              width: "200px",
+                              height: "50px",
+                              borderRadius: "10px",
+                              padding: "0 10px",
+                            }),
+                            option: (baseStyles) => ({
+                                ...baseStyles,
+                                color: colors.black,
+                            }),
+                            singleValue: (baseStyles) => ({
+                                ...baseStyles,
+                                color: "var(--color-text)", 
                             }),
                           }}
                         defaultValue={selectedOption}

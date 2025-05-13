@@ -1,6 +1,9 @@
+@import "../../../constants/_theme";
+
 .login{
     display: flex;
     height: calc(100vh - 10px);
+    background-color: var(--bg-color);
     padding: 5px;
     overflow: hidden;
     &__image{
@@ -24,5 +27,8 @@
     }
     &-wrapper_register{
         transform: translateX(-50vw);
+    }
+    p {
+        color: var(--text-color);
     }
 }

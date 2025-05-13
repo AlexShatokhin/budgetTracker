@@ -15,6 +15,8 @@ type MonthlyChartProps = {
 
 const MonthlyChart : FC<MonthlyChartProps> = ({width, height}) => {
     const {data, isFetching, isError} = useGetMonthlyTransactionsQuery();
+    const {getItem} = useStorage();
+    const theme = getItem("theme") || "light";
 
     const Component = useQueryState(isFetching, isError, data, {
         errorWidth: 250,
@@ -70,7 +72,7 @@ const MonthlyChart : FC<MonthlyChartProps> = ({width, height}) => {
                     text: 'Month'
                 },
                 ticks: {
-                    color: colors.black,
+                    color: theme === "light" ? colors.black : colors.white,
                     font: {
                         size: 14,
                         weight: 'bold'
@@ -87,7 +89,7 @@ const MonthlyChart : FC<MonthlyChartProps> = ({width, height}) => {
                     text: `Amount (${currencySymbol})`
                 },
                 ticks: {
-                    color: colors.black,
+                    color: theme === "light" ? colors.black : colors.white,
                     font: {
                         size: 12,
                     },

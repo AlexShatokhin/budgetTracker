@@ -2,6 +2,7 @@ import {FC} from "react";
 import { Bar } from "react-chartjs-2";
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from "chart.js";
 import { colors } from "../../../constants/colors";
+import useStorage from "../../hooks/useStorage";
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
@@ -20,6 +21,8 @@ type TotalChartProps = {
 }
 
 const TotalChart : FC<TotalChartProps> = ({data, onClick, isLoading}) => {
+	const {getItem} = useStorage();
+	const theme = getItem("theme") || "light";
 	const options = {
 		indexAxis: "y" as const, 
 		responsive: true,
@@ -33,7 +36,7 @@ const TotalChart : FC<TotalChartProps> = ({data, onClick, isLoading}) => {
 					padding: 20,
 					pointStyle: "circle",
 					usePointStyle: true,
-					color: colors.black,
+					color: theme === "light" ? colors.black : colors.white,
 
 					font: {
 						size: 12,

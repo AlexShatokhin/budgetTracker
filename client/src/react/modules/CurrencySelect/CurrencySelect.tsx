@@ -3,6 +3,7 @@ import { FaRubleSign, FaEuroSign  } from "react-icons/fa6";
 import { IoLogoUsd } from "react-icons/io5";
 import useStorage from '../../hooks/useStorage';
 import { useState } from 'react';
+import { colors } from '../../../constants/colors';
 
 const options = [
     { value: 'USD', label: <><IoLogoUsd /> USA Dollar</> },
@@ -14,7 +15,7 @@ const CurrencySelect = () => {
     const {setItem, getItem} = useStorage();
     const [selectedOption, setSelectedOption] = useState(getItem("currency") || options[0].value);
     return (
-        <Select defaultValue={options.find(option => selectedOption === option.value)||options[0]} onChange={(option)=> {setSelectedOption(option!.value); setItem("currency", option!.value)}} styles={
+        <Select defaultValue={options.find(option => selectedOption === option.value) || options[0]} onChange={(option) => { setSelectedOption(option!.value); setItem("currency", option!.value); }} styles={
             {
                 control: (baseStyles) => ({
                     ...baseStyles,
@@ -27,10 +28,14 @@ const CurrencySelect = () => {
                 }),
                 option: (baseStyles) => ({
                     ...baseStyles,
-                    color: "var(--color-text)",
+                    color: colors.black,
+                }),
+                singleValue: (baseStyles) => ({
+                    ...baseStyles,
+                    color: "var(--color-text)", 
                 }),
             }
-        } options={options}/>
+        } options={options} />
     )
 }
 

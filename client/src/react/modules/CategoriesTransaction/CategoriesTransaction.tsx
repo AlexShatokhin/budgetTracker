@@ -13,6 +13,7 @@ import { TransactionTableItem } from "../Transactions/TrasactionTableItemType";
 import "./categories_transactions.scss"
 import useQueryState from "../../hooks/useQueryState";
 import getTimeInterval from "../../helpers/getTimeInterval";
+import useStorage from "../../hooks/useStorage";
 
 const labelColors = [colors.lightblue, colors.red, colors.purple, colors.green, colors.yellow, colors.darkgreen, colors.orange]
 
@@ -40,7 +41,7 @@ const CategoriesTransaction : FC<CategoriesTransactionProps> = ({type, timeForma
     const {data, isFetching : chartFetching} = useGetTransactionGroupedByCategoryQuery({type, ...getTimeInterval(timeFormat)});
     const {data: transactionsByCategory, isFetching, isError} = useGetTransactionsByCategoryQuery({id: categoryID, ...getTimeInterval(timeFormat)}, {skip: categoryID === -1});
     const Component = useQueryState(isFetching, isError, transactionsByCategory, );
-    const currency = localStorage.getItem("currency") || "USD";
+    const currency = useStorage().getItem("currency") || "USD";
     console.log(currency)
     const currencySymbol = currency === "USD" ? "$" : currency === "EUR" ? "€" : "₽";
 

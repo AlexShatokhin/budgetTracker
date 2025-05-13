@@ -34,6 +34,7 @@ const ReportPage = () => {
                             checkedIcon={false}
                             uncheckedIcon={false}
                             checked={selectedAmountType === AmountType.INCOME}
+
                             onChange={(checked) => setSelectedAmountType(checked ? AmountType.INCOME : AmountType.EXPENSE)}/>
                         <span onClick={() => setSelectedAmountType(AmountType.INCOME)} className={selectedAmountType === AmountType.INCOME ? "choosen" : ""}>Income</span>
                     </div>
@@ -41,7 +42,26 @@ const ReportPage = () => {
                         onChange={(option) => setSelectedOption(option)}
                         className="select"
                         defaultValue={selectedOption}
-                        options={options}/>
+                        options={options}
+                        styles={{
+                            control: (baseStyles) => ({
+                                ...baseStyles,
+                                backgroundColor: "var(--wrapper-bg-color)",
+                                color: "var(--text-color)",
+                                width: "200px",
+                                height: "50px",
+                                borderRadius: "10px",
+                                padding: "0 10px",
+                              }),
+                              option: (baseStyles) => ({
+                                  ...baseStyles,
+                                  color: colors.black,
+                              }),
+                              singleValue: (baseStyles) => ({
+                                  ...baseStyles,
+                                  color: "var(--color-text)", 
+                              }),
+                          }}/>
                 </div>
 
                 <div className="reports-content">

@@ -29,17 +29,20 @@ const SettingsPage = () => {
                             type="password" 
                             placeholder="Current password"
                             width="100%"
-                            height="50px"/>
+                            height="50px"
+                            className="settings-input"/>
                         <Input
                             type="password" 
                             placeholder="New password"
                             width="100%"
-                            height="50px"/>
+                            height="50px"
+                            className="settings-input"/>
                         <Input
                             type="password" 
                             placeholder="Repeat new password"
                             width="100%"
-                            height="50px"/>
+                            height="50px"
+                            className="settings-input"/>
                         <Button
                             title="Change password"/>
                     </>}/>

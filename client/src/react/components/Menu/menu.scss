@@ -11,6 +11,7 @@
     justify-content: space-between;
     flex-direction: column;
     background-color: var(--bg-color);
+    transition: .5s all;
     &__list{
         margin: 0;
         padding: 0;
