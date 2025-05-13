@@ -8,6 +8,7 @@ import Wrapper from "../../UI/Wrapper/Wrapper";
 import "./settings_page.scss"
 import Button from "../../UI/Button/Button";
 import CurrencySelect from "../../modules/CurrencySelect/CurrencySelect";
+import ChangePassword from "../../modules/ChangePassword/ChangePassword";
 const SettingsPage = () => {
     return (
         <section className="settings">
@@ -24,28 +25,7 @@ const SettingsPage = () => {
                <SettingsItem 
                     title="Change password"
                     subtitle="Change your website password"
-                    content={<>
-                        <Input 
-                            type="password" 
-                            placeholder="Current password"
-                            width="100%"
-                            height="50px"
-                            className="settings-input"/>
-                        <Input
-                            type="password" 
-                            placeholder="New password"
-                            width="100%"
-                            height="50px"
-                            className="settings-input"/>
-                        <Input
-                            type="password" 
-                            placeholder="Repeat new password"
-                            width="100%"
-                            height="50px"
-                            className="settings-input"/>
-                        <Button
-                            title="Change password"/>
-                    </>}/>
+                    content={<ChangePassword />}/>
                 </Wrapper>
 
             </Layout>
