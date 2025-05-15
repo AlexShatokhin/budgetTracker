@@ -27,6 +27,13 @@ export const authorizationApi = createApi({
                 url: "/me",
                 method: "GET",
             })
+        }),
+        changePassword: build.mutation<{status: boolean, message: string}, {oldPassword: string, newPassword: string}>({
+            query: (body) => ({
+                url: "/change-password",
+                method: "POST",
+                body
+            })
         })
     }),
 })
@@ -34,5 +41,6 @@ export const authorizationApi = createApi({
 export const {
     useUserRegistrationMutation,
     useLazyUserAuthorizationQuery,
-    useFetchUserDataQuery
+    useFetchUserDataQuery,
+    useChangePasswordMutation
 } = authorizationApi
