@@ -63,12 +63,12 @@ class authService {
         if(oldPassword === newPassword) return res.status(400).json({message: 'New password cannot be same as old password'});
         if(newPassword.length < 6) return res.status(400).json({message: 'New password must be at least 6 characters long'});
 
-        const hashOldPassword = await bcrypt.hash(oldPassword, 10);
         const user = await this.prisma.users.findUnique({
             where: {id: req.userID}
         })
         if(!user) return res.status(400).json({message: 'User not found'});
-        if(user.password !== hashOldPassword) return res.status(400).json({message: 'Invalid credentials'});
+        const isPasswordValid = await bcrypt.compare(oldPassword, user.password);
+        if(!isPasswordValid) return res.status(400).json({message: 'Invalid credentials'});
 
         const hashNewPassword = await bcrypt.hash(newPassword, 10);
         await this.prisma.users.update({
