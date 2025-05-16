@@ -11,6 +11,6 @@ routes.get("/transactions/category/:categoryID", authMiddleware, transactionServ
 
 routes.post("/transactions", authMiddleware, transactionService.postTransaction);
 routes.put("/transactions/:transactionID", authMiddleware, transactionService.updateTransaction);
-routes.delete("/transactions/:transactionID", authMiddleware, transactionService.deleteTransaction);
+routes.delete("/transactions/", authMiddleware, transactionService.deleteTransaction);
 
 module.exports = routes;

@@ -45,6 +45,14 @@ export const transactionsApi = createApi({
         getTransactionsByCategory: build.query<TransactionServerResponse, {id: number, start: string, end: string}>({
             query: (data) => `/transactions/category/${data.id}?from=${data.start}&to=${data.end}`,
             providesTags: ["Transactions"],
+        }),
+        deleteTransactions: build.mutation<{message: string, status: number}, number[]>({
+            query: (ids) => ({
+                method: "DELETE",
+                url: "/transactions",
+                body: { transactionIds: ids }
+            }),
+            invalidatesTags: ["Transactions"],
         })
     })
 })
@@ -57,5 +65,6 @@ export const {
     useGetMonthlyTransactionsQuery,
     useGetAmountsByCategoryQuery,
     useGetTransactionGroupedByCategoryQuery,
-    useGetTransactionsByCategoryQuery
+    useGetTransactionsByCategoryQuery,
+    useDeleteTransactionsMutation
 } = transactionsApi

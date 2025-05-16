@@ -237,15 +237,18 @@ class transactionService {
     async deleteTransaction (req, res) {
         try {
             const client = new PrismaClient();
-            const { transactionID } = req.params;
-            await client.transactions.delete({
-                where: {id: transactionID}
+            const { transactionIds } = req.body;
+            if (!transactionIds) {
+                return res.status(400).json({ message: "Transaction IDs are required" });
+            }
+            await client.transactions.deleteMany({
+                where: {id: {in: transactionIds}}
             })
             res.status(200).json({message: "Transaction removed successfully"})
     
         } catch(err){
             console.log(err);
-            res.status(500).json("Internal Server Error");
+            res.status(500).json({message: "Transaction removed successfully"});
         }
     }
 }

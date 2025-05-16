@@ -7,6 +7,8 @@ import { Column } from "@table-library/react-table-library/types/compact";
 import { TableNode } from "@table-library/react-table-library";
 import { TransactionTableItem } from '../Transactions/TrasactionTableItemType';
 import useStorage from '../../hooks/useStorage';
+import { FaTrash } from "react-icons/fa";
+import { useDeleteTransactionsMutation } from '../../api/modules/transactionsApi';
 
 type TransactionTableProps = {
     data: TransactionTableItem[],
@@ -14,6 +16,8 @@ type TransactionTableProps = {
 }
 
 const TransactionTable : FC<TransactionTableProps> = ({data, disabled = false}) => {
+    const [deleteTransactions] = useDeleteTransactionsMutation();
+    
     const currency = useStorage().getItem("currency") || "USD";
     const currencySymbol = currency === "USD" ? "$" : currency === "EUR" ? "€" : "₽";
 
@@ -50,11 +54,22 @@ const TransactionTable : FC<TransactionTableProps> = ({data, disabled = false}) 
         },
       ];
 
+
+    const renderOnSelect = (ids: number[]) => {
+        console.log(ids);
+        return (
+            <button onClick={() => deleteTransactions(ids)} className="transactions-delete">
+                <FaTrash /> <span>Remove {ids.length} note(s)</span>
+            </button>
+        )
+    }
+
     return (
         <div className={`transactions-table ${disabled ? "transactions-table-disabled" : ""}`}>
             <ComposedTable 
                 data={data}
                 sortFns={sortFunctions}
+                render={renderOnSelect}
                 columns={COLUMNS as unknown as Column<TableNode>[]}/>
         </div>
     )

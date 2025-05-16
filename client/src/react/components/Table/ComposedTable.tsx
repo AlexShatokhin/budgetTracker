@@ -1,4 +1,4 @@
-import {FC} from 'react';
+import {FC, useEffect, useState} from 'react';
 import { CompactTable } from "@table-library/react-table-library/compact";
 import {usePagination} from '@table-library/react-table-library/pagination';
 import { useRowSelect } from "@table-library/react-table-library/select";
@@ -20,11 +20,16 @@ type ComposedTableProps = {
 	isSelect?: boolean;
 	columnsStyle?: string;
 	itemsPerPage?: number;
+	render?: (ids: number[]) => React.ReactNode;
 }
 
-const ComposedTable : FC<ComposedTableProps> = ({columns, sortFns, data, columnsStyle = "40px minmax(0px, 1fr) minmax(0px, 2fr) minmax(0px, 1fr) minmax(0px, 1fr)", isSelect = true, itemsPerPage = 10}) => {	
-	const tableData = {nodes: data}
-	const select = useRowSelect(tableData);
+const ComposedTable : FC<ComposedTableProps> = ({columns, sortFns, data, columnsStyle = "40px minmax(0px, 1fr) minmax(0px, 2fr) minmax(0px, 1fr) minmax(0px, 1fr)", isSelect = true, itemsPerPage = 10, render}) => {	
+	const tableData = {nodes: data};
+	const [selectedRows, setSelectedRows] = useState<number[]>([]);
+	const select = useRowSelect(tableData,{
+		onChange: (_, state) => setSelectedRows(state.ids),
+	}
+	);
 	const theme = useTheme([{
 		Row: `
 			transition: background-color 0.2s;
@@ -69,6 +74,11 @@ const ComposedTable : FC<ComposedTableProps> = ({columns, sortFns, data, columns
 		}
 	});
 
+	useEffect(() => {
+		select.fns.onRemoveAll();
+	}, [data])
+
+
   return (
 		<div className="table-container">
 			<CompactTable
@@ -94,6 +104,12 @@ const ComposedTable : FC<ComposedTableProps> = ({columns, sortFns, data, columns
 					</button>
 				</span>
 			</div>
+			{
+				render ? 
+				<div className={"table-mutation " + (selectedRows.length > 0 ? "table-mutation-show" : "")}>
+					{render(selectedRows)}
+				</div> : null
+			}
 		</div>
   );
 };

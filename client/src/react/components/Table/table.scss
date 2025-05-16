@@ -49,6 +49,29 @@ tbody{
     }
 }
 
+tbody input[type="checkbox"] {
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border: 2px solid $darkblue;
+  border-radius: 4px;
+  background: #fff;
+  cursor: pointer;
+  position: relative;
+}
+
+tbody input[type="checkbox"]:checked::after {
+  content: "";
+  position: absolute;
+  left: 3px;
+  top: 0px;
+  width: 6px;
+  height: 8px;
+  border: solid $blue;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
 .table-pagination{
     position: absolute;
     right: 8px;
@@ -87,4 +110,21 @@ tbody{
             cursor: not-allowed;
         }
     }
+}
+
+.table-mutation{
+    position: absolute;
+    bottom: 15px;
+    left: 30px;
+    width: 200px;
+    height: 30px;
+    border-radius: 10px;
+    padding: 7px;
+    border: 1px solid $grey;
+    transform: translateX(-200%);
+    transition: 0.4s all;
+}
+
+.table-mutation-show{
+    transform: translateX(0);
 }

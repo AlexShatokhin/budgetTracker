@@ -69,7 +69,7 @@ const Transactions = () => {
                 </div>
             </div>
             
-            <Wrapper title="Transaction History" width="78vw" height="70vh">
+            <Wrapper title="Transaction History" width="78vw" height="75vh">
                 <TransactionTable 
                     disabled={isFetching}
                     data={convertedTableData}/>
