@@ -32,3 +32,32 @@
         color: var(--text-color);
     }
 }
+
+@media screen and (max-width: 1200px) {
+    .login{
+        &__image{
+            width: 40%;
+        }
+        &-wrapper{
+            width: 120vw;
+        }
+        &-wrapper_register{
+            transform: translateX(-60vw);
+        }
+    }
+    
+}
+
+@media screen and (max-width: 767px) {
+    .login{
+        &__image{
+            display: none;
+        }
+        &-wrapper{
+            width: 200vw;
+        }
+        &-wrapper_register{
+            transform: translateX(-100vw);
+        }
+    }
+}

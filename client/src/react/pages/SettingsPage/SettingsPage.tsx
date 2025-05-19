@@ -1,12 +1,9 @@
 import Layout from "../../components/Layout/Layout";
 import SettingsItem from "../../modules/SettingsItem/SettingsItem";
 import ThemeToggling from "../../modules/ThemeToggling/ThemeToggling";
-import Select from "react-select";
-import Input from "../../UI/Input/Input";
 import Wrapper from "../../UI/Wrapper/Wrapper";
 
 import "./settings_page.scss"
-import Button from "../../UI/Button/Button";
 import CurrencySelect from "../../modules/CurrencySelect/CurrencySelect";
 import ChangePassword from "../../modules/ChangePassword/ChangePassword";
 const SettingsPage = () => {
