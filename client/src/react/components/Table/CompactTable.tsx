@@ -20,6 +20,7 @@ const CompactTable: FC<CompactTableProps> = ({data, columns, initialLoading, cou
   const theme = useTheme({
     Table: `
       --data-table-library_grid-template-columns: 1fr 2fr 1fr 1fr;
+      column-gap: 10px;
     `,
   });
 
