@@ -20,3 +20,26 @@
         }
     }
 }
+
+.insights-wrapper{
+    display: flex; 
+    width: 100%;
+    justify-content: space-between;
+}
+
+@media screen and (max-width: 1200px) {
+    .insights-wrapper{
+        flex-direction: column;
+    }
+    
+}
+
+@media screen and (max-width: 575px) {
+    .transactions-compact {
+        a {
+            right: 10px;
+            top: 10px;
+        }
+    }
+    
+}

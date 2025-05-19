@@ -13,3 +13,15 @@
     color: var(--text-color);
     transition: background-color 0.5s, color 0.5s;
 }
+
+@media screen and (max-width: 1200px) {
+    .content{
+        padding-left: 25px;
+    }
+}
+
+@media screen and (max-width: 575px) {
+    .content{
+        padding-left: 15px;
+    }
+}

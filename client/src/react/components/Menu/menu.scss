@@ -54,3 +54,23 @@
         flex-direction: column;
     }
 }
+
+@media screen and (max-width: 1200px) {
+    .menu{
+        width: 60px;
+        padding: 20px 10px;
+        &__list{
+            &-item{
+                a {
+                    padding: 15px;
+                    justify-content: center;
+                    svg{
+                        margin: 0;
+                        font-size: 20px;
+                    }
+                }
+            }
+        }
+    }
+    
+}

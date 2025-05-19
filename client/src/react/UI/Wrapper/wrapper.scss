@@ -52,3 +52,15 @@
         transform: translateY(0);
     }
 }
+
+@media screen and (max-width: 575px) {
+    .wrapper{
+        padding: 10px;
+        margin-bottom: 15px;
+        &__title{
+            font-size: 16px;
+            max-width: 100%;
+        }
+    }
+    
+}

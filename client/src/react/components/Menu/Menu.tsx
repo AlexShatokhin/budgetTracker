@@ -8,6 +8,7 @@ import MenuLink from "./UI/MenuLink";
 import "./menu.scss"
 import { useTypedDispatch } from "../../hooks/useRedux";
 import { removeToken } from "../../pages/Authorization/authorizationSlice";
+import useWindowDimensions from "../../hooks/useWindowDimensions";
 
 
 const routes = [
@@ -17,6 +18,8 @@ const routes = [
 ]
 const Menu = () => {
     const dispatch = useTypedDispatch();
+    const {width} = useWindowDimensions();
+    const isMobile = width < 1200;
     const logout = () => {
         dispatch(removeToken());
         localStorage.removeItem("token");
@@ -29,13 +32,13 @@ const Menu = () => {
                     <MenuLink 
                         key={route.path} 
                         route={route.path} 
-                        name={route.name} 
+                        name={isMobile ? "" : route.name} 
                         icon={route.icon}/>
                 ))}
             </ul>
             <ul className="menu__footer">
-                <MenuLink route={"/settings"} name={"Settings"} icon={<IoMdSettings />}/>
-                <MenuLink onClick={logout} route={"/"} name={"Log Out"} icon={<MdOutlineLogin />}/>
+                <MenuLink route={"/settings"} name={isMobile ? "" : "Settings"} icon={<IoMdSettings />}/>
+                <MenuLink onClick={logout} route={"/"} name={isMobile ? "" : "Log Out"} icon={<MdOutlineLogin />}/>
             </ul>
         </nav>
     )

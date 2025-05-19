@@ -4,6 +4,7 @@ import { useGetAmountsByCategoryQuery } from "../../api/modules/transactionsApi"
 import { AmountType } from "../../types/amountType";
 import "./finance_pie_chart.scss";
 import useQueryState from "../../hooks/useQueryState";
+import useWindowDimensions from "../../hooks/useWindowDimensions";
 
 const FinancePieChart = () => {
         const {data, isFetching, isError} = useGetAmountsByCategoryQuery();
@@ -12,6 +13,8 @@ const FinancePieChart = () => {
             errorHeight: 200,
         });
         const [dataType, setDataType] = useState(AmountType.EXPENSE);
+        const {width} = useWindowDimensions();
+        const isSmallMobile = width < 575;
         const neededTransactions = data?.result.filter((transaction) => transaction.type.toUpperCase() === dataType) || [];
         const labels : string[] = neededTransactions?.map((transaction) => transaction.category);
         const values : number[] = neededTransactions?.map((transaction) => transaction.amount);
@@ -25,7 +28,7 @@ const FinancePieChart = () => {
                 <button className={dataType === AmountType.EXPENSE ? "active" : ""} onClick={() => setDataType(AmountType.EXPENSE)}>Expense</button>
                 <button className={dataType === AmountType.INCOME ? "active" : ""} onClick={() => setDataType(AmountType.INCOME)}>Income</button>
             </div>
-            <FinanceChart labels={labels} data={values} width="330px" height="380px"/>
+            <FinanceChart labels={labels} data={values} width={isSmallMobile? "240px" : "330px"} height="380px"/>
              </>}
            
         </div>
