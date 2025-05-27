@@ -10,7 +10,7 @@ const SettingsPage = () => {
     return (
         <section className="settings">
             <Layout>
-                <Wrapper title="Settings" width="78vw" height="80vh" className="settings-wrapper">
+                <Wrapper title="Settings" width="78vw" height="95vh" className="settings-wrapper">
                 <SettingsItem 
                     title="Preference mode"
                     subtitle="Choose your preferred mode"

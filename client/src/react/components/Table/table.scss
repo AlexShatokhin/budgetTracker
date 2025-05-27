@@ -9,6 +9,17 @@ table {
     background-color: var(--bg-color);
 }
 
+@media screen and (max-width: 575px) {
+    table {
+        width: 100%;
+        overflow-x: visible;
+        display: block;
+        font-size: 12px;
+        padding: 15px 0;
+    }
+    
+}
+
 thead{
 
     td{

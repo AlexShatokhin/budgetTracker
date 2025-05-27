@@ -29,7 +29,7 @@ const HomePage = () => {
                         <Link to="/transactions"> <span>View all</span> <IoChevronForwardSharp /></Link>
                     </Wrapper>
                 </div>
-                <Wrapper titleInfo="Monthly Income and Expenses" title="Monthly Income and Expenses" width="calc(100% - 90px)" height={isSmallMobile ? "350px" : "200px"}>
+                <Wrapper titleInfo="Monthly Income and Expenses" title="Monthly Income and Expenses" width="calc(100% - 90px)" height={isSmallMobile ? "200px" : "350px"}>
                     <MonthlyChart width="1500px" height="300px" />
                 </Wrapper>
             </Layout>

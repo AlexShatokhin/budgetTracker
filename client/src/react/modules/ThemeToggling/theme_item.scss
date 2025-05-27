@@ -39,3 +39,32 @@
         }
     }
 }
+
+@media screen and (max-width: 1200px) {
+    .theme-item{
+        width: 200px;
+        height: 150px;
+        &__image img{
+            width: 100px;
+        }
+    }
+}
+
+@media screen and (max-width: 575px) {
+    .theme-item{
+        width: 150px;
+        height: 100px;
+        &__image{
+            height: calc(100% - 35px);
+        }
+        &__image img{
+            width: 70px;
+        }
+        &__label{
+            height: 35px;
+            label{
+                font-size: 13px;
+            }
+        }
+    }
+}

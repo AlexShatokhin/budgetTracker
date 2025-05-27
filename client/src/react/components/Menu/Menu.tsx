@@ -19,7 +19,7 @@ const routes = [
 const Menu = () => {
     const dispatch = useTypedDispatch();
     const {width} = useWindowDimensions();
-    const isMobile = width < 1200;
+    const isMobile = width <= 1200;
     const logout = () => {
         dispatch(removeToken());
         localStorage.removeItem("token");

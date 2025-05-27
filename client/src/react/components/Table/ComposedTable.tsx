@@ -23,7 +23,7 @@ type ComposedTableProps = {
 	render?: (ids: number[]) => React.ReactNode;
 }
 
-const ComposedTable : FC<ComposedTableProps> = ({columns, sortFns, data, columnsStyle = "40px minmax(0px, 1fr) minmax(0px, 2fr) minmax(0px, 1fr) minmax(0px, 1fr)", isSelect = true, itemsPerPage = 10, render}) => {	
+const ComposedTable : FC<ComposedTableProps> = ({columns, sortFns, data, columnsStyle = "40px minmax(0px, 1fr) minmax(0px, 2fr) minmax(0px, 0.7fr) minmax(0px, 0.7fr)", isSelect = true, itemsPerPage = 10, render}) => {	
 	const tableData = {nodes: data};
 	const [selectedRows, setSelectedRows] = useState<number[]>([]);
 	const select = useRowSelect(tableData,{

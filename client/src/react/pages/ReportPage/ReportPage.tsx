@@ -9,6 +9,7 @@ import { AmountType } from "../../types/amountType";
 import { colors } from "../../../constants/colors";
 
 import "./report_page.scss";
+import useWindowDimensions from "../../hooks/useWindowDimensions";
 const options = [
     { value: 'week', label: 'Last Week' },
     { value: 'month', label: 'Last Month' },
@@ -18,7 +19,9 @@ const options = [
 const ReportPage = () => {
     const [selectedOption, setSelectedOption] = useState<SingleValue<{value: string, label: string}>>(options[1]);
     const [selectedAmountType, setSelectedAmountType] = useState<AmountType>(AmountType.INCOME)
-    
+    const {width} = useWindowDimensions();
+    const isMobile = width < 1200;
+    const isSmallMobile = width <= 480;
     return (
         <section className="reports">
             <Layout>
@@ -46,12 +49,12 @@ const ReportPage = () => {
                         styles={{
                             control: (baseStyles) => ({
                                 ...baseStyles,
-                                backgroundColor: "var(--wrapper-bg-color)",
-                                color: "var(--text-color)",
-                                width: "200px",
-                                height: "50px",
-                                borderRadius: "10px",
-                                padding: "0 10px",
+                             backgroundColor: "var(--wrapper-bg-color)",
+                              color: "var(--text-color)",
+                              width: "200px",
+                              height: "50px",
+                              borderRadius: "10px",
+                              padding:"0 10px",
                               }),
                               option: (baseStyles) => ({
                                   ...baseStyles,

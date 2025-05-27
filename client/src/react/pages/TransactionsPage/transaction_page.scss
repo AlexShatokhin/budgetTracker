@@ -62,3 +62,38 @@
     }
 
 }
+
+@media screen and (max-width: 1200px) {
+    .transactions{
+        .add-transaction {
+            border-radius: 10px;
+            svg {
+                margin-right: 0;
+            }
+        }
+    }
+    
+}
+
+@media screen and (max-width: 575px) {
+    .transactions{
+        &-wrapper{
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+            row-gap: 10px;
+        }
+        .add-transaction{
+            right: 20px;
+            font-size: 14px;
+            padding: 5px 10px;
+        }
+        &-select{
+            width: 300px;
+            margin-right: 20px;
+        }
+        &-stats{
+            width: 260px;
+        }
+    }
+}

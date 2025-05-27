@@ -44,3 +44,16 @@
     padding: 0 20px;
     width: 100%;
 }
+
+@media screen and (max-width: 575px) {
+    .input-wrapper {
+        .input {
+            font-size: 13px;
+        }
+    }
+    
+    .textarea-wrapper {
+        padding: 0 10px;
+    }
+    
+}

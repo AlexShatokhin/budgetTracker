@@ -32,3 +32,16 @@
 .reports-content{
     margin-top: 50px;
 }
+
+@media screen and (max-width: 900px) {
+    .report-config{
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        right: 0;
+        top: 0;
+        .select{
+            margin-top: 20px;
+        }
+    }  
+}

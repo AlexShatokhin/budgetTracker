@@ -9,6 +9,7 @@ import { useGetTransactionsQuery } from "../../api/modules/transactionsApi";
 import { TransactionTableItem } from "./TrasactionTableItemType";
 import getTimeInterval from "../../helpers/getTimeInterval";
 import { colors } from "../../../constants/colors";
+import useWindowDimensions from "../../hooks/useWindowDimensions";
 
 const options = [
     { value: 'week', label: 'Last Week' },
@@ -23,6 +24,9 @@ const Transactions = () => {
     const convertedTableData : TransactionTableItem[] = data?.result?.map((item : TransactionServerType) => ({id: item.id, date: new Date(item.date), description: item.note, amount: item.amount, category: item.category, type: item.type})) || [];
     const totalIncome = data?.total.income || 0;
     const totalExpense = data?.total.expense || 0; 
+    const {width} = useWindowDimensions();
+    const isMobile = width < 1200;
+    const isSmallMobile = width <= 480;
 
     useEffect(() => {
         console.log(data)
