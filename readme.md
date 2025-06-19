@@ -83,4 +83,8 @@
 ![Страница отчетов](./screenshots/reports.png)
 ![Настройки](./screenshots/settings.png)
 
-![Видео](./screenshots/budget_tracker.mp4)
+
+
+
+https://github.com/user-attachments/assets/c7b7dc7c-d544-4f4f-8eee-1ae5c8393327
+
