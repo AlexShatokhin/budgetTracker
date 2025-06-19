@@ -47,7 +47,7 @@
    ```bash
    git clone https://github.com/your-username/budget-tracket.git
    cd budget-tracket
-  ```
+  ``
 
 2. **Установите зависимости для клиента и сервера:**
    ```bash
@@ -55,26 +55,26 @@
     npm install
     cd ../server
     npm install
-  ```
+  ``
 
 3. **Настройте переменные окружения для сервера:**
    ```bash
     DATABASE_URL= __secret__
     SECRET_KEY= __secret__
     PORT = __secret__
-  ```
+  ``
 
 4. **Запустите сервер:**
    ```bash
     cd server
     npm start
-  ```
+  ``
 
 5. **Запустите клиент:**
    ```bash
     cd client
     npm start
-  ```
+  ``
 
 ## 🖼️ Скриншоты и видео
 
